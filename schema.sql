@@ -1,0 +1,2 @@
+CREATE DATABASE covid19;
+USE covid19;
