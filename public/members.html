@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <link href="stylesheets/style.css" rel="stylesheet" />
   </head>
 
@@ -98,10 +99,57 @@
         </div>
       </div>
 
-      <div class="column has-text-centered columnTest">Map Goes Here</div>
+      <div class="column has-text-centered columnTest" id="map"></div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js" integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-heatmap@2.0.0"></script>
+    <script src="/js/heatmap-sample.js"></script>
+
+    <script>
+      var map = L.map('map').setView([39.82109, -94.2193], 4);
+
+      // Add heatmap data
+      addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+
+      // Set theme, try 'DarkGray'
+      L.esri.basemapLayer('Gray').addTo(map);
+
+      var heat = L.heatLayer(addressPoints).addTo(map),
+        draw = true;
+
+    </script>
+    <!-- 
+    <script>
+      var tileLayer = new L.TileLayer('//{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        'attribution': '© <a href="http://openstreetmap.org">OpenStreetMap</a>'
+      });
+      var map = new L.Map('map', {
+        'center': [39, -95],
+        'zoom': 4,
+        'layers': [tileLayer]
+      });
+      L.esri.basemapLayer('Gray').addTo(map); // also try 'DarkGray'
+      // new constructor syntax at 2.0.0
+      L.esri.Heat.featureLayer({
+        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommunityAddressing/MapServer/0',
+        radius: 10
+      }).addTo(map);
+    </script> -->
+<!-- 
+    <script type="text/javascript">
+      var tileLayer = new L.TileLayer('//{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        'attribution': '© <a href="http://openstreetmap.org">OpenStreetMap</a>'
+      });
+      var map = new L.Map('map', {
+        'center': [39, -90],
+        'zoom': 4,
+        'layers': [tileLayer]
+      });
+    </script> -->
     <script type="text/javascript" src="js/members.js"></script>
   </body>
 </html>
