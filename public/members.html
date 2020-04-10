@@ -12,20 +12,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
     <link href="stylesheets/style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <!-- <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/logout">
-            Logout
-          </a>
-        </div>
-      </div>
-    </nav> -->
     <nav class="navbar box" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="#">
@@ -101,26 +97,60 @@
 
       <div class="column has-text-centered columnTest" id="map"></div>
     </div>
+    <table class="table is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th class="has-text-centered is-narrow">City</th>
+          <th class="has-text-centered is-narrow">Province</th>
+          <th class="has-text-centered is-narrow">Country</th>
+          <th class="has-text-centered is-narrow">Confirmed</th>
+          <th class="has-text-centered is-narrow">Deaths</th>
+          <th class="has-text-centered is-narrow">Recovered</th>
+          <th class="has-text-centered is-narrow">Last Update</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr id="tr"></tr>
+        <!-- <tr id="tbodyRow2">
+          <td>mockdata here</td>
+          <td>mockdata here</td>
+          <td>mockdata here</td>
+          <td>mockdata here</td>
+          <td>mockdata here</td>
+          <td>mockdata here</td>
+          <td>mockdata here</td>
+        </tr> -->
+      </tbody>
+    </table>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-    <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js" integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ==" crossorigin=""></script>
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+    <script
+      src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"
+      integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ=="
+      crossorigin=""
+    ></script>
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
     <script src="https://unpkg.com/esri-leaflet-heatmap@2.0.0"></script>
     <script src="/js/heatmap-sample.js"></script>
 
     <script>
-      var map = L.map('map').setView([39.82109, -94.2193], 4);
+      var map = L.map("map").setView([39.82109, -94.2193], 4);
 
       // Add heatmap data
-      addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+      addressPoints = addressPoints.map(function (p) {
+        return [p[0], p[1]];
+      });
 
       // Set theme, try 'DarkGray'
-      L.esri.basemapLayer('Gray').addTo(map);
+      L.esri.basemapLayer("Gray").addTo(map);
 
       var heat = L.heatLayer(addressPoints).addTo(map),
         draw = true;
-
     </script>
     <!-- 
     <script>
@@ -139,7 +169,7 @@
         radius: 10
       }).addTo(map);
     </script> -->
-<!-- 
+    <!-- 
     <script type="text/javascript">
       var tileLayer = new L.TileLayer('//{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         'attribution': '© <a href="http://openstreetmap.org">OpenStreetMap</a>'
@@ -150,6 +180,7 @@
         'layers': [tileLayer]
       });
     </script> -->
+    <script type="text/javascript" src="js/tableGeneration.js"></script>
     <script type="text/javascript" src="js/members.js"></script>
   </body>
 </html>
