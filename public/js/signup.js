@@ -1,8 +1,13 @@
 $(document).ready(function() {
   // Getting references to our form and input
   var signUpForm = $("form.signup");
-  var emailInput = $("input#email-input");
-  var passwordInput = $("input#password-input");
+  var emailInput = $("input#email-input-login");
+  var passwordInput = $("input#password-input-login");
+
+  if (!emailInput){
+    emailInput = $("input#email-input-register");
+    passwordInput = $("input#password-input-register");
+  }
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
@@ -29,14 +34,14 @@ $(document).ready(function() {
       password: password
     })
       .then(function(data) {
-        window.location.replace("/members");
+        //window.location.replace("/members");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
   }
 
   function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
+    $(".message .msg").text(err.responseJSON);
+    $(".message").fadeIn(500);
   }
 });
