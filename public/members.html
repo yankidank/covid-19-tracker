@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Passport Authentication</title>
+    <title>Covd-19 Dashboard</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css"
-    /> -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
     <link
       rel="stylesheet"
@@ -24,7 +24,7 @@
   <body>
     <nav class="navbar box" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="#">
+        <a class="navbar-item" href="./">
           Covid-19 Tracker
         </a>
 
@@ -43,7 +43,7 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
+          <a class="navbar-item" href="./">
             Home
           </a>
 
@@ -121,18 +121,33 @@
         </header>
         <section class="modal-card-body">
           <form class="signup">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="email-input" placeholder="Email">
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input class="input" type="email" autocomplete="email" id="email-input-register" placeholder="Email">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <!-- <span class="icon is-small is-right">
+                  <i class="fas fa-check"></i>
+                </span> -->
+              </p>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="password-input" placeholder="Password">
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="password" autocomplete="new-password" id="password-input-register" placeholder="Password">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
             </div>
-            <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Error:</span> <span class="msg"></span>
-            </div>
+            <article style="display: none" class="message is-danger">
+              <div class="message-header">
+                <p>Error</p>
+              </div>
+              <div class="message-body">
+                <span class="msg"></span>
+              </div>
+            </article>
           </form>
         </section>
         <footer class="modal-card-foot">
@@ -150,13 +165,24 @@
         </header>
         <section class="modal-card-body">
           <form class="login">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="email-input" placeholder="Email">
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input class="input" type="email" autocomplete="email" id="email-input-login" placeholder="Email">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <!-- <span class="icon is-small is-right">
+                  <i class="fas fa-check"></i>
+                </span> -->
+              </p>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="password-input" placeholder="Password">
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="password" autocomplete="current-password" id="password-input-login" placeholder="Password">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
             </div>
           </form>
         </section>
@@ -166,7 +192,7 @@
         </footer>
       </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
     <script
       src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
@@ -225,6 +251,7 @@
       });
     </script> -->
     <script type="text/javascript" src="js/tableGeneration.js"></script>
+    <script type="text/javascript" src="js/signup.js"></script>
     <script type="text/javascript" src="js/members.js"></script>
   </body>
 </html>
