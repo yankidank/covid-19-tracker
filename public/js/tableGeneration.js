@@ -1,13 +1,3 @@
-$("tbody").click(function () {
-  console.log("click success with jQuery");
-});
-// for (a = 1; a < 101; a++) {
-//   $("<tr>").text("Testing");
-
-// var newRow = $("<tr>");
-// newRow.attr("id", "row1");
-// $("#row1").appendTo("#tbody");
-
 var statsArr = [
   "city",
   "province",
