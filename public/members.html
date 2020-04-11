@@ -65,10 +65,10 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
+              <a class="button is-primary" id="auth-signup">
                 <strong>Sign up</strong>
               </a>
-              <a class="button is-light">
+              <a class="button is-light" id="auth-login">
                 Log in
               </a>
             </div>
@@ -112,7 +112,62 @@
       <tbody id="tbody"></tbody>
     </table>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <div class="modal" id="modal-register">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Create an Account</p>
+          <button class="delete exit-modal" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <form class="signup">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="email-input" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="password-input" placeholder="Password">
+            </div>
+            <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span> <span class="msg"></span>
+            </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button type="submit" class="button is-success">Sign Up</button>
+          <button class="button exit-modal">Cancel</button>
+        </footer>
+      </div>
+    </div>
+    <div class="modal" id="modal-signup">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Login to Your Account</p>
+          <button class="delete exit-modal" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <form class="login">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="email-input" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="password-input" placeholder="Password">
+            </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button type="submit" class="button is-success">Login</button>
+          <button class="button exit-modal">Cancel</button>
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
     <script
       src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="

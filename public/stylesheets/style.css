@@ -2,12 +2,16 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
-
 .columnTest {
   border: solid;
 }
-
 .table {
   margin-left: auto;
   margin-right: auto;
+}
+.modal {
+  z-index:200;
+}
+.leaflet-top, .leaflet-pane, .leaflet-overlay-pane, .leaflet-layer, .leaflet-map-pane canvas {
+  z-index: 1;
 }
