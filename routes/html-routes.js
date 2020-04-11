@@ -1,8 +1,11 @@
 // Requiring path to so we can use relative routes to our HTML files
 var path = require("path");
+var exphbs = require("express-handlebars");
 
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
+
+var testObj = { test: "obj" };
 
 module.exports = function (app) {
   app.get("/", function (req, res) {
@@ -11,7 +14,8 @@ module.exports = function (app) {
     //   res.redirect("/members");
     // }
     // res.sendFile(path.join(__dirname, "../public/signup.html"));
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+    res.render("index", testObj);
+    // res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
   app.get("/login", function (req, res) {
