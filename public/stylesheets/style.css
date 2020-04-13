@@ -12,6 +12,15 @@ form.login {
 .modal {
   z-index:200;
 }
-.leaflet-top, .leaflet-pane, .leaflet-overlay-pane, .leaflet-layer, .leaflet-map-pane canvas {
+.leaflet-top, .leaflet-pane, .leaflet-overlay-pane, .leaflet-layer, .leaflet-map-pane canvas, .esri-dynamic-attribution {
   z-index: 1;
+}
+.modal-card-body form.login, .modal-card-body form.signup {
+  margin-top:0;
+}
+.box:not(:last-child) {
+  margin-bottom:0.8rem;
+}
+.leaflet-container {
+  min-height:450px;
 }

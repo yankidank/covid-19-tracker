@@ -43,6 +43,7 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
+        mewsletter: req.user.newsletter,
         id: req.user.id
       });
     }

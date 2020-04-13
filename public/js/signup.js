@@ -7,6 +7,8 @@ $(document).ready(function() {
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
+    console.log('submit!')
+
     event.preventDefault();
     let choice= $("input[type='radio']:checked").val()
     let choiceMap= {
@@ -19,6 +21,7 @@ $(document).ready(function() {
       password: passwordInput.val().trim(),
       subscription: choiceMap[choice]
     };
+
 
     if (!userData.email || !userData.password) {
       return;
@@ -45,9 +48,11 @@ $(document).ready(function() {
       })
       .catch(handleLoginErr);
   }
+  
 
   function handleLoginErr(err) {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
   }
+
 });
