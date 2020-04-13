@@ -91,11 +91,10 @@
             <button class="delete exit-modal" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <form class="signup">
+            <form id="register">
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                        <input class="input" type="email" autocomplete="email" id="email-input-register"
-                            placeholder="Email">
+                        <input class="input" type="email" autocomplete="email" id="email-input-register" placeholder="Email">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -111,6 +110,16 @@
                         <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                         </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <div class="b-checkbox is-primary is-circular">
+                            <input id="checkbox" class="styled" checked type="checkbox">
+                            <label for="checkbox">
+                                Subscribe to Newsletter
+                            </label>
+                        </div>
                     </p>
                 </div>
                 <article style="display: none" class="message is-danger">
@@ -136,12 +145,11 @@
             <p class="modal-card-title">Login to Your Account</p>
             <button class="delete exit-modal" aria-label="close"></button>
         </header>
-        <section class="modal-card-body">
-            <form class="login">
+        <section class="modal-card-body"> 
+            <form id="login">
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                        <input class="input" type="email" autocomplete="email" id="email-input-login"
-                            placeholder="Email">
+                        <input class="input" type="email" autocomplete="email" id="email-input-login" placeholder="Email">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -152,8 +160,7 @@
                 </div>
                 <div class="field">
                     <p class="control has-icons-left">
-                        <input class="input" type="password" autocomplete="current-password" id="password-input-login"
-                            placeholder="Password">
+                        <input class="input" type="password" autocomplete="current-password" id="password-input-login" placeholder="Password">
                         <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                         </span>
