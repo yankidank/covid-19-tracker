@@ -18,3 +18,9 @@ form.login {
 .modal-card-body form.login, .modal-card-body form.signup {
   margin-top:0;
 }
+.box:not(:last-child) {
+  margin-bottom:0.8rem;
+}
+.leaflet-container {
+  min-height:450px;
+}
