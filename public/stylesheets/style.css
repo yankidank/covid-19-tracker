@@ -2,6 +2,11 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+@media only screen and (min-width: 769px) {
+  .stats {
+    padding-left: 1.35rem;
+  }
+}
 .table {
   margin-left: auto;
   margin-right: auto;
@@ -20,4 +25,11 @@ form.login {
 }
 .leaflet-container {
   min-height:450px;
+}
+.b-checkbox {
+  margin-left:11px;
+  margin-top:13px;
+}
+.b-checkbox label {
+  padding-left: 12px;
 }
