@@ -7,20 +7,20 @@ $(document).ready(function() {
 });
 
 // User Login/Signup Modal
-$( "#auth-signup" ).click(function() {
-  $( "#modal-register" ).addClass( "is-active" );
+$("#auth-signup").click(function() {
+  $("#modal-register").addClass("is-active");
 });
-$( "#auth-login" ).click(function() {
-  $( "#modal-signup" ).addClass( "is-active" );
+$("#auth-login").click(function() {
+  $("#modal-signup").addClass("is-active");
 });
-$( ".exit-modal" ).click(function() {
-  $( "#modal-signup" ).removeClass( "is-active" );
-  $( "#modal-register" ).removeClass( "is-active" );
+$(".exit-modal").click(function() {
+  $("#modal-signup").removeClass("is-active");
+  $( "#modal-register").removeClass("is-active");
 });
 // Escape key press exits modal
 $(document).keyup(function(e) {
-     if (e.key === "Escape") {
-      $( "#modal-signup" ).removeClass( "is-active" );
-      $( "#modal-register" ).removeClass( "is-active" );
-    }
+  if (e.key === "Escape") {
+    $("#modal-signup").removeClass("is-active");
+    $("#modal-register").removeClass("is-active");
+  }
 });
