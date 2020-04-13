@@ -2,7 +2,13 @@ $(document).ready(function() {
   // GET request to figure out which user is logged in
   // updates the HTML on the page
   $.get("/api/user_data").then(function(data) {
-    $(".member-name").text(data.email);
+    if (data.email){
+      $('.buttons').css("display", "none");
+      $(".member-name").text('Welcome Back '+data.email);
+      //console.log('Subscribed: '+data.subscription)
+    } else {
+      $('.buttons').css("display", "block");
+    }
   });
 });
 // User Login/Signup Modal
