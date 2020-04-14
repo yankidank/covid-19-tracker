@@ -1,5 +1,6 @@
 // Requiring necessary npm packages
 require('dotenv').config();
+const fs = require('fs');
 const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
@@ -46,13 +47,15 @@ db.sequelize.sync().then(function () {
   });
 });
 
-/*
+/* 
+// Get the HTML email contents
+var mailContent = fs.readFileSync('./public/mail.html','utf8')
 // Send email using nodemailer + sparkpost transport
 transporter.sendMail({
   from: 'mail@mail.ericheikkinen.com',
-  to: 'sample@test.com',
+  to: 'test@mail.com',
   subject: 'Covid19 Newsletter',
-  html: '<p>Hello world!</p>'
+  html: mailContent
 }, (err, info) => {
   if (err) {
     console.error(err);
