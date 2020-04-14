@@ -3,8 +3,9 @@ form.login {
   margin-top: 50px;
 }
 @media only screen and (min-width: 769px) {
-  .stats {
-    padding-right: 1.4rem;
+  .columns {
+    padding-left: 12px;
+    padding-right:12px;
   }
 }
 .table {
@@ -32,4 +33,23 @@ form.login {
 }
 .b-checkbox label {
   padding-left: 12px;
+}
+.navbar-brand .navbar-item {
+  font-size:1.32rem;
+  font-weight:500;
+}
+.navbar-start {
+  margin-top:4px;
+}
+.is-primary {
+  background-color: #366fc5 !important;
+}
+.is-info {
+  background-color: #366fc5 !important;
+}
+.is-link {
+  background-color: #2b9a4d !important;
+}
+.is-danger {
+  background-color: #ca2523 !important;
 }
