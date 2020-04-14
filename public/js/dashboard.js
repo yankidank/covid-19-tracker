@@ -9,11 +9,12 @@ $(document).ready(function() {
     dataType: 'json', // type of response data
     timeout: 500,     // timeout milliseconds
     success: function (data) {   // success callback function
+      var dataPositive = parseInt(data[0].positive, 10);
+      var dataRecovered = parseInt(data[0].recovered, 10);
+      var dataDeath = parseInt(data[0].death, 10);
       $('#countConfirmed').text(numberWithCommas(data[0].positive));
       $('#countRecovered').text(numberWithCommas(data[0].recovered));
       $('#countDeaths').text(numberWithCommas(data[0].death));
-      console.log(data)
-      console.log('counter updated')
     },
     error: function (errorMessage) { // error callback 
       console.log('Error: ' + errorMessage)
@@ -97,27 +98,3 @@ $('#navbar-toggle').click(function() {
   $('#navbarBasicExample, .navbar-menu').toggleClass('is-active');
   $('.navbar-burger').toggleClass('is-active');
 });
-
-/* 
-[
-  {
-  "positive": 579390,
-  "negative": 2393818,
-  "pending": 16574,
-  "hospitalizedCurrently": 53086,
-  "hospitalizedCumulative": 63459,
-  "inIcuCurrently": 13915,
-  "inIcuCumulative": 1646,
-  "onVentilatorCurrently": 6148,
-  "onVentilatorCumulative": 221,
-  "recovered": 36299,
-  "hash": "b8c86a54731066776520600de5f5ec4d5bd929a4",
-  "lastModified": "2020-04-14T19:12:15.053Z",
-  "death": 23529,
-  "hospitalized": 63459,
-  "total": 2989782,
-  "totalTestResults": 2973208,
-  "posNeg": 2973208,
-  "notes": "NOTE: \"total\", \"posNeg\", \"hospitalized\" will be removed in the future."
-  }
-] */

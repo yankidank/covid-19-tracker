@@ -26,6 +26,7 @@
     "nodemailer-sparkpost-transport": "^2.2.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "request": "^2.88.2",
     "sequelize": "^5.21.6"
   }
 }
