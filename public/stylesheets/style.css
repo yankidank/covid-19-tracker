@@ -2,7 +2,34 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
-
-.columnTest {
-  border: solid;
+@media only screen and (min-width: 769px) {
+  .stats {
+    padding-left: 1.35rem;
+  }
+}
+.table {
+  margin-left: auto;
+  margin-right: auto;
+}
+.modal {
+  z-index:200;
+}
+.leaflet-top, .leaflet-pane, .leaflet-overlay-pane, .leaflet-layer, .leaflet-map-pane canvas, .esri-dynamic-attribution {
+  z-index: 1;
+}
+.modal-card-body form.login, .modal-card-body form.signup {
+  margin-top:0;
+}
+.box:not(:last-child) {
+  margin-bottom:0.8rem;
+}
+.leaflet-container {
+  min-height:450px;
+}
+.b-checkbox {
+  margin-left:11px;
+  margin-top:13px;
+}
+.b-checkbox label {
+  padding-left: 12px;
 }

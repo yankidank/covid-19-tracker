@@ -1,0 +1,221 @@
+<nav class="navbar box" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="./">
+            Covid-19 Tracker
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample" id="navbar-toggle">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="./">
+                Home
+            </a>
+            <a class="navbar-item" href="./about/">
+                About
+            </a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="member-name"></div>
+                <div class="buttons" style="display:none;">
+                    <a class="button is-primary" id="auth-signup">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a class="button is-light" id="auth-login">
+                        Log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="columns">
+    <div class="column is-narrow is-one-quarter stats">
+        <div class="notification has-text-centered">
+            Global Statistics
+        </div>
+        <div class="notification is-primary">
+            <div class="has-text-centered is-size-2">1,000,000</div>
+            <div class="has-text-centered is-size-6">Confirmed</div>
+        </div>
+        <div class="notification is-link">
+            <div class="has-text-centered is-size-2">20,000</div>
+            <div class="has-text-centered is-size-6">Recovered</div>
+        </div>
+        <div class="notification is-danger">
+            <div class="has-text-centered is-size-2">15,000</div>
+            <div class="has-text-centered is-size-6">Deaths</div>
+        </div>
+    </div>
+
+    <div class="column is-three-quarters" id="map"></div>
+</div>
+<!-- Here we capture the Start Year Parameter-->
+<div class="form-group">
+    <label for="country_input">Country Name:</label>
+    <input type="text" class="form-control" id="country_input" />
+</div>
+<button id="run-search">Search</button>
+<table class="table is-hoverable is-fullwidth">
+    <thead>
+        <tr>
+            <th class="has-text-centered is-narrow">Country</th>
+            <th class="has-text-centered is-narrow">State/Province</th>
+            <th class="has-text-centered is-narrow">City</th>
+            <th class="has-text-centered is-narrow">Confirmed</th>
+            <th class="has-text-centered is-narrow">Deaths</th>
+            <th class="has-text-centered is-narrow">Recovered</th>
+            <th class="has-text-centered is-narrow">Last Update</th>
+        </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+</table>
+<div class="modal" id="modal-register">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Create an Account</p>
+            <button class="delete exit-modal" aria-label="close"></button>
+        </header>
+        <form id="form-signup">
+            <section class="modal-card-body">
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input name="exampleInputEmail1" class="input" type="email" autocomplete="email"
+                            id="email-register-input" placeholder="Email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <span class="icon is-small is-right check-email is-hidden">
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input name="exampleInputPassword1" class="input" type="password" autocomplete="new-password"
+                            id="password-register-input" placeholder="Password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input name="exampleInputPassword2" class="input" type="password" autocomplete="new-password"
+                            id="password-register-repeat" placeholder="Repeat Password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <div class="b-checkbox is-success is-circular">
+                            <input name="subscription-signup" id="subscription-signup" class="styled" checked
+                                type="checkbox">
+                            <label for="subscription-signup">
+                                Subscribe to Newsletter
+                            </label>
+                        </div>
+                    </p>
+                </div>
+                <article style="display: none" id="alert-signup" class="message is-danger" role="alert">
+                    <div class="message-header">
+                        <p>Error</p>
+                    </div>
+                    <div class="message-body">
+                        <span class="msg"></span>
+                    </div>
+                </article>
+            </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">Sign Up</button>
+                <button class="button exit-modal">Cancel</button>
+            </footer>
+        </form>
+    </div>
+</div>
+<div class="modal" id="modal-signup">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Login to Your Account</p>
+            <button class="delete exit-modal" aria-label="close"></button>
+        </header>
+        <form id="form-login">
+            <section class="modal-card-body">
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input" type="email" autocomplete="email" id="email-login-input"
+                            placeholder="Email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <span class="icon is-small is-right check-email is-hidden">
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" autocomplete="current-password" id="password-login-input"
+                            placeholder="Password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <article style="display: none" id="alert-login" class="message is-danger" role="alert">
+                    <div class="message-header">
+                        <p>Error</p>
+                    </div>
+                    <div class="message-body">
+                        <span class="msg"></span>
+                    </div>
+                </article>
+            </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">Login</button>
+                <button class="button exit-modal">Cancel</button>
+            </footer>
+        </form>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+<script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"
+    integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ=="
+    crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="https://unpkg.com/esri-leaflet-heatmap@2.0.0"></script>
+<script src="/js/heatmap-sample.js"></script>
+
+<script>
+    var map = L.map("map").setView([39.82109, -94.2193], 4);
+
+    // Add heatmap data
+    addressPoints = addressPoints.map(function (p) {
+        return [p[0], p[1]];
+    });
+
+    // Set theme, try 'DarkGray'
+    L.esri.basemapLayer("Gray").addTo(map);
+
+    var heat = L.heatLayer(addressPoints).addTo(map),
+        draw = true;
+</script>
+<script type="text/javascript" src="js/tableGeneration.js"></script>
+<script type="text/javascript" src="js/signup.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/dashboard.js"></script>
