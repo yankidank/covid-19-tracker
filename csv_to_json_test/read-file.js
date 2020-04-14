@@ -44,44 +44,43 @@ connection.connect(function(err) {
 
                     for (var i = 0; i < jsonObj.length; i++){
                         var day = jsonObj[i];
-                        //console.log(day);
+                        console.log(day);
 
                         //filtering in case of empty fields
                         var Province;
-                        if (day['Province/State'] == ""){
-                            console.log("blank province");
-                            Province = "";
-                        }
-                        else{
-                            Province = day['Province/State'];
-                        }
+                        if (day['Province/State'] == ""){Province = "";}
+                        else{Province = day['Province/State'];}
+
                         var Confirmed;
-                        if (day.Confirmed == ""){
-                            Confirmed = 0;
-                        }
-                        else{
-                            Confirmed = parseInt(day.Confirmed)
-                        }
+                        if (day.Confirmed == ""){Confirmed = 0;}
+                        else{Confirmed = parseInt(day.Confirmed);}
+
                         var Deaths;
-                        if (day.Deaths == ""){
-                            Deaths = 0;
-                        }
-                        else{
-                            Deaths = parseInt(day.Deaths)
-                        }
+                        if (day.Deaths == ""){Deaths = 0;}
+                        else{Deaths = parseInt(day.Deaths);}
+
                         var Recovered;
-                        if (day.Recovered == ""){
-                            Recovered = 0;
-                        }
-                        else{
-                            Recovered = parseInt(day.Recovered)
-                        }
+                        if (day.Recovered == ""){Recovered = 0;}
+                        else{Recovered = parseInt(day.Recovered);}
 
                         //date handling
-                        
-                        var day_moment = moment(day['Last Update'], "M/DD/YYYY HH:mm");
+                        var day_moment = moment(day['Last Update'], "M/DD/YYYY HH:mm"); // format A - prior to Feb 2, 2020
+                        if (!day_moment.isValid()){
+                            day_moment = moment(day['Last Update'], "YYYY-MM-DD'T'HH:mm:ss"); //format B - Feb 2, 2020 onward
+                            console.log("date format changed");
+                        }
+                        if (!day_moment.isValid()){
+                            //
+                        }
                         console.log(day_moment.format("YYYY-MM-DD HH:mm"));
                         var day_datetime = day_moment.format("YYYY-MM-DD HH:mm");
+
+                        if (!day_moment.isValid()){
+                            console.log("invalid date: " + day['Last Update']);
+                        }
+                        else{
+                            console.log("okay date: " + day['Last Update']);
+                        }
 
                         var query = `INSERT INTO stats (province, country, confirmed, deaths, recovery, last_update) 
                         VALUES ("` + Province + `", "` + day['Country/Region'] +
