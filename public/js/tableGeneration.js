@@ -13,20 +13,17 @@ function buildQueryURL() {
   // Grab text the user typed into the search input, add to the queryParams object
 
   var country_input = $("#country_input").val().trim();
-  console.log(country_input);
   country_input = country_input.toLowerCase();
-  console.log(country_input);
 
   //special case for US
   if (country_input == "us") {
     //capitalize both letters, so that we get "US"
     country_input = country_input.toUpperCase();
-    console.log(country_input);
   } else {
     //capitalize the first letter of the country name
     country_input = country_input[0].toUpperCase() + country_input.slice(1);
-    console.log(country_input);
   }
+  console.log(country_input);
 
   queryParams.country = country_input;
   // queryParams.q = $("#search-term")
@@ -34,8 +31,8 @@ function buildQueryURL() {
   //   .trim();
 
   // Logging the URL so we have access to it for troubleshooting
-  console.log("---------------\nURL: " + queryURL + "\n---------------");
-  console.log(queryURL + $.param(queryParams));
+  // console.log("---------------\nURL: " + queryURL + "\n---------------");
+  // console.log(queryURL + $.param(queryParams));
   return queryURL + $.param(queryParams);
 }
 
@@ -65,8 +62,8 @@ function displayResponse(CovidData) {
         newTableData.attr("class", "has-text-centered");
         // for (a = 0; a < statsArr.length; a++) {
         // console.log(searchedStats[0].statsArr[0])
-        console.log(searchedStats);
-        console.log(searchedStats.length);
+        // console.log(searchedStats);
+        // console.log(searchedStats.length);
         // for (b = 0; b < searchedStats.length; b++) {
         $(`#country${rowNum}`).text(searchedStats[rowNum].country);
         $(`#province${rowNum}`).text(searchedStats[rowNum].province);
@@ -84,8 +81,29 @@ function displayResponse(CovidData) {
 
 $("#run-search").on("click", performSearch);
 
+// Auto-search partial input with a delay
+// Adds additional search after user presses enter or clicks button =(
+/* function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+$('#country_input').keyup(delay(function (e) {
+  console.log('Searching: ', this.value);
+  performSearch();
+}, 1000)); */
+
+$("#country_filter").submit(function(event){
+  event.preventDefault();  
+  performSearch();
+});
+
 function performSearch() {
-  event.preventDefault();
 
   var queryURL = buildQueryURL();
 
