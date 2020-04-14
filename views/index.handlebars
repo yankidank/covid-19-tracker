@@ -57,6 +57,12 @@
 
     <div class="column is-three-quarters" id="map"></div>
 </div>
+<!-- Here we capture the Start Year Parameter-->
+<div class="form-group">
+    <label for="country_input">Country Name:</label>
+    <input type="text" class="form-control" id="country_input" />
+</div>
+<button id="run-search">Search</button>
 <table class="table is-hoverable is-fullwidth">
     <thead>
         <tr>
@@ -203,6 +209,7 @@
     var heat = L.heatLayer(addressPoints).addTo(map),
         draw = true;
 </script>
+<script type="text/javascript" src="js/API_grabber.js"></script>
 <script type="text/javascript" src="js/tableGeneration.js"></script>
 <script type="text/javascript" src="js/signup.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
