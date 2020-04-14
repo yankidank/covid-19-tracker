@@ -42,14 +42,14 @@ form.login {
   margin-top:4px;
 }
 .is-primary {
-  background-color: #366fc5 !important;
+  background-color: #4277c5 !important;
 }
 .is-info {
-  background-color: #366fc5 !important;
+  background-color: #4277c5 !important;
 }
 .is-link {
-  background-color: #2b9a4d !important;
+  background-color: #18b18e !important;
 }
 .is-danger {
-  background-color: #ca2523 !important;
+  background-color: #c72543  !important;
 }
