@@ -41,10 +41,7 @@ form.login {
 .navbar-start {
   margin-top:4px;
 }
-.is-primary {
-  background-color: #4277c5 !important;
-}
-.is-info {
+.is-primary, .is-info, .button.is-success {
   background-color: #4277c5 !important;
 }
 .is-link {
