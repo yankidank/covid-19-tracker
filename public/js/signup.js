@@ -1,58 +1,65 @@
 $(document).ready(function() {
   // Getting references to our form and input
-  var signUpForm = $("form.signup");
-  var emailInput = $("input#email-input");
-  var passwordInput = $("input#password-input");
-  var passwordInput2 = $("input#password-input2");
+  var signUpForm = $("form#form-signup");
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
-    console.log('submit!')
-
+    // Submit button add loading icon
+    $(".modal-card-foot .is-success").addClass("is-loading");
     event.preventDefault();
-    let choice= $("input[type='radio']:checked").val()
-    let choiceMap= {
-      "Yes":true,
-      "No":false
-    }
-    console.log(choice)
+    let emailInput = $("input#email-register-input");
+    let passwordInput = $("input#password-register-input");
+    let passwordInput2 = $("input#password-register-repeat");
+    var newsletterInput = $('#subscription-signup').is(':checked');
+
     var userData = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim(),
-      subscription: choiceMap[choice]
+      subscription: newsletterInput
     };
 
-
+    // Clear previous error messages
+    $('.msg').empty();
+    
     if (!userData.email || !userData.password) {
-      return;
+      // Submit button remove loading icon
+      $(".modal-card-foot .is-success").removeClass("is-loading");
+      $('#alert-signup').css("display", "block");
+      return $('.msg').append($('<h6>').text('Missing email or password field!'));
     }
-    if (passwordInput.val().trim()!==passwordInput2.val().trim())return $('form').append($('<h6>').text("passwords don't match"));
+    if (passwordInput.val().trim() !== passwordInput2.val().trim()){
+      $(".modal-card-foot .is-success").removeClass("is-loading");
+      $('#alert-signup').css("display", "block");
+      return $('.msg').append($('<h6>').text('Passwords do not match!'));
+    }
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.email, userData.password, userData.subscription);
     emailInput.val("");
     passwordInput.val("");
+    $(".modal-card-foot .is-success").removeClass("is-loading");
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function signUpUser(email, password, subscription) {
-
     $.post("/api/signup", {
       email: email,
       password: password,
       subscription: subscription
     })
       .then(function(data) {
-        window.location.replace("/members");
+        window.location.replace("/");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
   }
   
-
   function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
+    $(".modal-card-foot .is-success").removeClass("is-loading");
+    $("#alert-signup .message-body .msg").text(err.responseJSON);
+    $("#alert-signup").fadeIn(500);
+    $("#alert-login .message-body .msg").text(err.responseJSON);
+    $("#alert-login").fadeIn(500);
   }
 
 });
