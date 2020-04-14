@@ -61,3 +61,20 @@ function performSearch() {
     },
   }).then(displayResponse);
 }
+
+function searchAll() {
+  var queryURL =
+    "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
+  $.ajax({
+    async: true,
+    crossDomain: true,
+    url: queryURL,
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
+      "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
+    },
+  }).then(displayResponse);
+}
+
+searchAll();
