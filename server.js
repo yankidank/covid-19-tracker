@@ -1,16 +1,23 @@
 // Requiring necessary npm packages
-var express = require("express");
-var session = require("express-session");
-var exphbs = require("express-handlebars");
+require('dotenv').config();
+const express = require("express");
+const session = require("express-session");
+const exphbs = require("express-handlebars");
+const nodemailer = require('nodemailer')
+const sparkPostTransport = require('nodemailer-sparkpost-transport')
+const transporter = nodemailer.createTransport(sparkPostTransport({
+  'sparkPostApiKey': process.env.SPARKPOST_API_KEY
+}))
+
 // Requiring passport as we've configured it
-var passport = require("./config/passport");
+const passport = require("./config/passport");
 
 // Setting up port and requiring models for syncing
-var PORT = process.env.PORT || 8080;
-var db = require("./models");
+const PORT = process.env.PORT || 8080;
+const db = require("./models");
 
 // Creating express app and configuring middleware needed for authentication
-var app = express();
+const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -38,3 +45,19 @@ db.sequelize.sync().then(function () {
     );
   });
 });
+
+/*
+// Send email using nodemailer + sparkpost transport
+transporter.sendMail({
+  from: 'mail@mail.ericheikkinen.com',
+  to: 'sample@test.com',
+  subject: 'Covid19 Newsletter',
+  html: '<p>Hello world!</p>'
+}, (err, info) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(info);
+  }
+})
+ */
