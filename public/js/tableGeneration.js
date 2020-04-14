@@ -88,9 +88,9 @@ function searchAll() {
 searchAll();
 
 var statsArr = [
-  "city",
-  "province",
   "country",
+  "state/province",
+  "city",
   "confirmed",
   "deaths",
   "recovered",
