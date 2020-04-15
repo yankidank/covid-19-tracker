@@ -48,4 +48,16 @@ module.exports = function(app) {
       });
     }
   });
+
+  app.get("/api/covid_data/deaths", function(req, res){
+    db.stats.findAll({
+      attributes: ['latitude', 'longitude', 'deaths'],
+      where:{
+        $not: [{'latitude': null}, {'longitude': "0.000000000000000"}]
+      },
+      order:[['longitude', 'DESC']]
+    }).then(function(dbStats){
+      res.json(dbStats);
+    })
+  });
 };
