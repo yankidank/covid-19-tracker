@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+const { Op } = require("sequelize");
+
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -71,5 +73,17 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
+  });
+
+  app.get("/api/covid_data/deaths", function(req, res){
+    db.stats.findAll({
+      attributes: ['latitude', 'longitude', 'deaths'],
+      where:{
+        [Op.not]: {'latitude': null}
+      },
+      order:[['longitude', 'ASC']]
+    }).then(function(dbStats){
+      res.json(dbStats);
+    })
   });
 };
