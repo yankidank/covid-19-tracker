@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
     user: "root",
   
     // Your password
-    password: "password",
+    password: "",
     database: "covid19"
 });
 
@@ -26,7 +26,7 @@ connection.connect(function(err) {
     if (err) throw err;
     
     fs.readdir("./data_folder/daily_reports/", function (err, files) {
-
+        console.log(files)
         files.forEach(function (file, index) {
             //grabs the name of each file in the directory, saves in variable "file"
             console.log(file);

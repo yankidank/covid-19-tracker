@@ -202,22 +202,6 @@
     crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 <script src="https://unpkg.com/esri-leaflet-heatmap@2.0.0"></script>
-<script src="/js/heatmap-sample.js"></script>
-
-<script>
-    var map = L.map("map").setView([39.82109, -94.2193], 4);
-
-    // Add heatmap data
-    addressPoints = addressPoints.map(function (p) {
-        return [p[0], p[1]];
-    });
-
-    // Set theme, try 'DarkGray'
-    L.esri.basemapLayer("Gray").addTo(map);
-
-    var heat = L.heatLayer(addressPoints).addTo(map),
-        draw = true;
-</script>
 <script type="text/javascript" src="js/tableGeneration.js"></script>
 <script type="text/javascript" src="js/signup.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
