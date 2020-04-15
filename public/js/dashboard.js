@@ -92,7 +92,7 @@ $(document).ready(function() {
       $('.buttons').css("display", "block");
     }
   });
-// });
+});
 // User Login/Signup Modal
 $("#auth-signup").click(function() {
   $("#modal-register").addClass("is-active");
@@ -116,4 +116,3 @@ $('#navbar-toggle').click(function() {
   $('#navbarBasicExample, .navbar-menu').toggleClass('is-active');
   $('.navbar-burger').toggleClass('is-active');
 });
-
