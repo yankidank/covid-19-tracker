@@ -1,11 +1,75 @@
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 $(document).ready(function() {
+
+  $.ajax('https://covidtracking.com/api/us', 
+  {
+    dataType: 'json', // type of response data
+    timeout: 500,     // timeout milliseconds
+    success: function (data) {   // success callback function
+      var dataPositive = parseInt(data[0].positive, 10);
+      var dataRecovered = parseInt(data[0].recovered, 10);
+      var dataDeath = parseInt(data[0].death, 10);
+      $('#countConfirmed').text(numberWithCommas(data[0].positive));
+      $('#countRecovered').text(numberWithCommas(data[0].recovered));
+      $('#countDeaths').text(numberWithCommas(data[0].death));
+    },
+    error: function (errorMessage) { // error callback 
+      console.log('Error: ' + errorMessage)
+    }
+  });
+
   // GET request to figure out which user is logged in
   // updates the HTML on the page
   $.get("/api/user_data").then(function(data) {
-    if (data.email){
+    if (data.email){      
       $('.buttons').css("display", "none");
       $(".member-name").text('Welcome Back '+data.email);
-      //console.log('Subscribed: '+data.subscription)
+      console.log(data.subscription)
+      if (data.subscription){
+        // Check it
+        $(".member-name").append(`<div class="b-checkbox is-success is-circular">
+        <input name="subscription-navbar" id="subscription-navbar" class="styled" checked type="checkbox">
+        <label for="subscription-navbar" id="subscription-message">
+            Subscribed to Newsletter
+        </label>
+    </div>`)
+      } else {
+        $(".member-name").append(`<div class="b-checkbox is-success is-circular">
+        <input name="subscription-navbar" id="subscription-navbar" class="styled" type="checkbox">
+        <label for="subscription-navbar" id="subscription-message">
+            Subscribe to Newsletter
+        </label>
+    </div>`)
+      }
+      $("#subscription-navbar").click(function(){
+        if (data.subscription){
+          $.ajax({
+            url: '/api/subscribe/'+data.id,
+            type: 'PUT',
+            data: {subscription:false},
+            success: function(data) {
+              console.log('Unsubscribed')
+              console.log(data)
+            }
+          });
+        } else {
+          $.ajax({
+            url: '/api/subscribe/'+data.id,
+            type: 'PUT',
+            data: {subscription:true},
+            success: function(data) {
+              console.log('Subscribed')
+              console.log(data)
+            }
+          });
+        }
+        
+        $('#subscription-message').text($('#subscription-message').text() == 'Subscribe to Newsletter' ? 'Subscribed to Newsletter' : 'Subscribe to Newsletter');
+      }); 
+      
     } else {
       $('.buttons').css("display", "block");
     }

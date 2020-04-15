@@ -10,9 +10,6 @@ $(document).ready(function() {
     let emailInput = $("input#email-login-input");
     let passwordInput = $("input#password-login-input");
 
-    console.log(emailInput)
-    console.log(passwordInput)
-
     var userData = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()

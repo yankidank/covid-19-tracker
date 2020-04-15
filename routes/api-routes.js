@@ -27,6 +27,30 @@ module.exports = function(app) {
       });
   });
 
+  app.put("/api/subscribe/:userId", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      async function updateRow() {
+        let id = await db.User.update(
+          { subscription: req.body.subscription },
+          { where: { id: req.user.id } }
+        ).then(function() {
+          res.json({
+            email: req.user.email,
+            subscription: req.user.subscription,
+            id: req.user.id
+          });
+        })
+        .catch(function(err) {
+          res.status(401).json(err);
+        });
+      }   
+      updateRow();
+    }
+  })
+
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();

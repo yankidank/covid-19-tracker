@@ -3,8 +3,9 @@ form.login {
   margin-top: 50px;
 }
 @media only screen and (min-width: 769px) {
-  .stats {
-    padding-left: 1.35rem;
+  .columns {
+    padding-left: 12px;
+    padding-right:12px;
   }
 }
 .table {
@@ -14,7 +15,7 @@ form.login {
 .modal {
   z-index:200;
 }
-.leaflet-top, .leaflet-pane, .leaflet-overlay-pane, .leaflet-layer, .leaflet-map-pane canvas, .esri-dynamic-attribution {
+.leaflet-top, .leaflet-bottom, .leaflet-pane, .leaflet-overlay-pane, .leaflet-layer, .leaflet-map-pane canvas, .esri-dynamic-attribution {
   z-index: 1;
 }
 .modal-card-body form.login, .modal-card-body form.signup {
@@ -32,4 +33,20 @@ form.login {
 }
 .b-checkbox label {
   padding-left: 12px;
+}
+.navbar-brand .navbar-item {
+  font-size:1.32rem;
+  font-weight:500;
+}
+.navbar-start {
+  margin-top:4px;
+}
+.is-primary, .is-info, .button.is-success {
+  background-color: #4277c5 !important;
+}
+.is-link {
+  background-color: #18b18e !important;
+}
+.is-danger {
+  background-color: #c72543  !important;
 }
