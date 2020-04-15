@@ -17,7 +17,6 @@ $(document).ready(function() {
       console.log(error)
     });
   }
-
   getGlobalStats()
 
 
@@ -38,7 +37,39 @@ $(document).ready(function() {
   //   }
   // });
 
+  // Heatmap Data 
+  var addressPoints = []
+  function getMapData(){
+    $.ajax({
+      url: '/api/covid_data/deaths',
+      method: "GET"
+    }).then(function(response) {
+      for (let index = 0; index < response.length; index++) {
+        const element = response[index];
+        const arrayConstruct = []
+        arrayConstruct.push(element.latitude)
+        arrayConstruct.push(element.longitude)
+        arrayConstruct.push(element.deaths)
+        addressPoints.push(arrayConstruct)
+      }
+    }).catch(function(error){
+      console.log(error)
+    });
+  }
+  getMapData()
+  var map = L.map("map").setView([39.82109, -94.2193], 4);
 
+  // Add heatmap data
+  addressPoints = addressPoints.map(function (p) {
+      return [p[0], p[1]];
+  });
+
+  // Set theme, try 'DarkGray'
+  L.esri.basemapLayer("Gray").addTo(map);
+
+  var heat = L.heatLayer(addressPoints).addTo(map),
+    draw = true;
+  
   // GET request to figure out which user is logged in
   // updates the HTML on the page
   $.get("/api/user_data").then(function(data) {
