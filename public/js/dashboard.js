@@ -21,6 +21,25 @@ $(document).ready(function() {
     }
   });
 
+  //global data
+  // $.ajax('https://api.covid19api.com/summary', 
+  // {
+  //   dataType: 'json', // type of response data
+  //   timeout: 500,     // timeout milliseconds
+  //   success: function (data) {   // success callback function
+  //     var dataPositive = parseInt(data[0].positive, 10);
+  //     var dataRecovered = parseInt(data[0].recovered, 10);
+  //     var dataDeath = parseInt(data[0].death, 10);
+  //     $('#countConfirmed').text(numberWithCommas(data[0].positive));
+  //     $('#countRecovered').text(numberWithCommas(data[0].recovered));
+  //     $('#countDeaths').text(numberWithCommas(data[0].death));
+  //   },
+  //   error: function (errorMessage) { // error callback 
+  //     console.log('Error: ' + errorMessage)
+  //   }
+  // });
+
+
   // GET request to figure out which user is logged in
   // updates the HTML on the page
   $.get("/api/user_data").then(function(data) {
@@ -98,3 +117,4 @@ $('#navbar-toggle').click(function() {
   $('#navbarBasicExample, .navbar-menu').toggleClass('is-active');
   $('.navbar-burger').toggleClass('is-active');
 });
+
