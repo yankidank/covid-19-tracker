@@ -54,3 +54,6 @@ form.login {
   vertical-align: middle;
   margin-bottom:1px;
 }
+.navbar.box {
+  border-radius:0;
+}
