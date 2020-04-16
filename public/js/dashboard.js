@@ -3,6 +3,7 @@ function numberWithCommas(x) {
 }
 
 $(document).ready(function() {
+
   //global stats
   function getGlobalStats(){
     var queryURL = "https://api.covid19api.com/summary";
@@ -20,27 +21,9 @@ $(document).ready(function() {
   }
   getGlobalStats()
 
-
-  // $.ajax('https://covidtracking.com/api/us', 
-  // {
-  //   dataType: 'json', // type of response data
-  //   timeout: 500,     // timeout milliseconds
-  //   success: function (data) {   // success callback function
-  //     var dataPositive = parseInt(data[0].positive, 10);
-  //     var dataRecovered = parseInt(data[0].recovered, 10);
-  //     var dataDeath = parseInt(data[0].death, 10);
-  //     $('#countConfirmed').text(numberWithCommas(data[0].positive));
-  //     $('#countRecovered').text(numberWithCommas(data[0].recovered));
-  //     $('#countDeaths').text(numberWithCommas(data[0].death));
-  //   },
-  //   error: function (errorMessage) { // error callback 
-  //     console.log('Error: ' + errorMessage)
-  //   }
-  // });
-
   // Heatmap Data 
   var addressPoints = []
-  function getMapData(){
+  async function getMapData(){
     $.ajax({
       url: '/api/covid_data/deaths',
       method: "GET"
@@ -57,19 +40,78 @@ $(document).ready(function() {
       console.log(error)
     });
   }
-  getMapData()
-  var map = L.map("map").setView([39.82109, -94.2193], 4);
+
+  // Prepare the map
+  var map
+  function generateMap(lat,lon){
+    if (map){
+      map.remove();
+    }
+    if (!lat || !lon) {
+      // Set default map position to North America
+      map = L.map("map").setView([39.82109, -94.2193], 4);
+    } else {
+      // Zoom map to latitude and longitude
+      map = L.map("map").setView([lat, lon], 6);
+    }
+      // Set theme, try 'DarkGray'
+    L.esri.basemapLayer("Gray").addTo(map);
+    L.heatLayer(addressPoints).addTo(map), draw = true;
+  }
+
+  // IP to location API
+  async function ipSearch(){
+    $.ajax({
+      url: 'http://ip-api.com/json?callback=?',
+      method: "GET",
+      dataType: 'json',       
+      jsonp: 'callback'
+    }).then(function(response) {
+      //console.log(response)
+      $("#country_input").val(response.country)
+      console.log("performSearch "+response.country)
+      performSearch(response.country);
+      generateMap(response.lat, response.lon)
+      console.log("Location from IP API");
+    }).catch(function(error){
+      console.log(error)
+    });
+  }
+
+  // Request User's Location
+/*   async function getLocation() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log('Location from Browser')
+      navigator.geolocation.getCurrentPosition(showPosition);
+      ipSearch().then()
+    },
+    function(error) {
+      if (error.code == error.PERMISSION_DENIED){
+        // IP to Country API query
+        ipSearch().then()
+      }
+    });
+  } */
+  
+  function showPosition(position) { 
+    generateMap(position.coords.latitude, position.coords.longitude)
+  }
 
   // Add heatmap data
   addressPoints = addressPoints.map(function (p) {
       return [p[0], p[1]];
   });
 
-  // Set theme, try 'DarkGray'
-  L.esri.basemapLayer("Gray").addTo(map);
+  //generateMap()
+  getMapData().then(generateMap);
 
-  var heat = L.heatLayer(addressPoints).addTo(map),
-    draw = true;
+  $("#icon-geolocate").click(function(){
+    $("#icon-geolocate").toggleClass("fa-crosshairs")
+    $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")
+    ipSearch();
+    $("#icon-geolocate").toggleClass("fa-crosshairs")
+    $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")
+  })
   
   // GET request to figure out which user is logged in
   // updates the HTML on the page
@@ -77,7 +119,7 @@ $(document).ready(function() {
     if (data.email){      
       $('.buttons').css("display", "none");
       $(".member-name").text('Welcome Back '+data.email);
-      console.log(data.subscription)
+      //console.log(data.subscription)
       if (data.subscription){
         // Check it
         $(".member-name").append(`<div class="b-checkbox is-success is-circular">

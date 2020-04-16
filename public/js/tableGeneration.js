@@ -2,7 +2,7 @@
 
 //console.log(flagConvert.Andorra);
 
-function buildQueryURL() {
+function buildQueryURL(country) {
   // queryURL is the url we'll use to query the API
   var queryURL =
     "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
@@ -14,9 +14,21 @@ function buildQueryURL() {
   //     "api-key": "b2dec6e1b6mshd60cb05bc70bdfap14e2acjsnc1a94c703cf1"
   // };
 
+  var country_input
   // Grab text the user typed into the search input, add to the queryParams object
+  if (country){
+    console.log(country)
+    country_input = String(country);
+  } else {
+    country_input = String($("#country_input").val().trim());
+  }
 
-  var country_input = $("#country_input").val().trim();
+  // If country is passed as a parameter, override the input field
+  if (country){
+    country_input = country
+  }
+
+  country_input = String(country_input)
   country_input = country_input.toLowerCase();
 
   if (country_input){
@@ -30,7 +42,9 @@ function buildQueryURL() {
     }
   }
 
-  function getCountryStats(){
+  function getCountryStats(country_input){
+
+    // Correct common country names to match API
     if (country_input === "us" || country_input === "US" || country_input === "USA" || country_input === "United States" || country_input === "America" || country_input === "U.S." || country_input === "U.S.A.") {
       country_input = "United States of America";
     } else if (country_input === "UK" || country_input === "Britain"){
@@ -77,19 +91,21 @@ function buildQueryURL() {
       }
       var countryResponse = response.Countries
       var resArr = countryResponse.filter(countryFilter);
-      
-      if (resArr[0].TotalConfirmed){
+      console.log(resArr[0])
+      console.log('Update HTML')
+      if (resArr[0].TotalConfirmed && resArr[0].TotalRecovered && resArr[0].TotalDeaths){
         $('#countTitle').text(country_input+' Statistics');
+        $('#countConfirmed').text(numberWithCommas(resArr[0].TotalConfirmed));
+        $('#countRecovered').text(numberWithCommas(resArr[0].TotalRecovered));
+        $('#countDeaths').text(numberWithCommas(resArr[0].TotalDeaths));
       }
-      $('#countConfirmed').text(numberWithCommas(resArr[0].TotalConfirmed));
-      $('#countRecovered').text(numberWithCommas(resArr[0].TotalRecovered));
-      $('#countDeaths').text(numberWithCommas(resArr[0].TotalDeaths));
+      
     }).catch(function(error){
       console.log(error)
     });
   }
   if (country_input){
-    getCountryStats()
+    getCountryStats(country_input)
   }
 
   queryParams.country = country_input;
@@ -111,7 +127,6 @@ function displayResponse(CovidData) {
     var country_input = $("#country_input").val().trim();
     if (country_input){
       country_input = country_input.toLowerCase();
-      console.log('1:'+country_input)
       //special case for US
       if (country_input === "Us" || country_input === "us" || country_input === "USA" || country_input === "Usa" || country_input === "United States" || country_input === "America" || country_input === "U.S." || country_input === "U.S.A.") {
         //capitalize both letters, so that we get "US"
@@ -121,7 +136,6 @@ function displayResponse(CovidData) {
         //capitalize the first letter of the country name
         country_input = country_input[0].toUpperCase() + country_input.slice(1);
       }
-      console.log('2:'+country_input)
 
       // Data sort and filter
       var dataFiltered = CovidData.data.covid19Stats
@@ -135,8 +149,8 @@ function displayResponse(CovidData) {
           .filter(city => city.city != '')
           .filter(city => city.province != '')
       } */
+      //console.log(dataFiltered)
 
-      console.log(dataFiltered)
       // Update to filtered data
       searchedStats = dataFiltered
     }
@@ -202,12 +216,14 @@ function displayResponse(CovidData) {
       $(`#recovered${c}`).text(searchedStats[c].recovered);
       $(`#lastUpdate${c}`).text(searchedStats[c].lastUpdate);
     }
+    // End icon animation
     $("#icon-search").toggleClass("fa-search")
     $("#icon-search").toggleClass("fa-spinner fa-pulse")
   });
 }
 
 $("#run-search").on("click", performSearch);
+$("#run-geolocate").on("click", performSearch);
 
 // Auto-search partial input with a delay
 // Adds additional search after user presses enter or clicks button =(
@@ -231,13 +247,11 @@ $("#country_filter").submit(function (event) {
   performSearch();
 });
 
-function performSearch() {
-  console.log('Search performed...')
+function performSearch(countryQuery) {
+  // Begin icon animation
   $("#icon-search").toggleClass("fa-search")
   $("#icon-search").toggleClass("fa-spinner fa-pulse")
-
-  var queryURL = buildQueryURL();
-
+  var queryURL = buildQueryURL(countryQuery);
   $.ajax({
     async: true,
     crossDomain: true,
