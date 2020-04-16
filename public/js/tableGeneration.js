@@ -79,12 +79,14 @@ function displayResponse(CovidData) {
     // Insert data into table
     for (c = 0; c < rowsAvailableFromBackend; c++) {
       $(`#country${c}`).text(searchedStats[c].country);
-      searchedStats[c].province === ""
-        ? $(`#province${c}`).text("-")
-        : $(`#province${c}`).text(searchedStats[c].province);
-      searchedStats[c].province === "Recovered"
-        ? $(`#row${c}`).remove()
-        : $(`#province${c}`).text(searchedStats[c].province);
+      if (searchedStats[c].province === "") {
+        $(`#province${c}`).text("-");
+        // $(`#province${c}`).text(searchedStats[c].province);
+      } else if (searchedStats[c].province === "Recovered") {
+        $(`#row${c}`).remove();
+      } else {
+        $(`#province${c}`).text(searchedStats[c].province);
+      }
       searchedStats[c].city === ""
         ? $(`#city${c}`).text("-")
         : $(`#city${c}`).text(searchedStats[c].city);
