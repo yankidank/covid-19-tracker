@@ -54,16 +54,26 @@ function displayResponse(CovidData) {
     var rowsAvailableFromBackend = searchedStats.length;
 
     // Create empty rows and table data cells equal to the number provided by API
-    for (a = 0; a < rowsAvailableFromBackend; a++) {
-      var newTableRow = $("<tr>");
-      newTableRow.attr("id", "row" + a);
-      newTableRow.appendTo(tbody);
-      for (b = 0; b < statsArr.length; b++) {
-        var newTableData = $("<td>");
-        newTableData.attr("id", `${statsArr[b]}${a}`);
-        newTableData.attr("class", "has-text-centered");
-        newTableData.appendTo($(`#row${a}`));
+    function createEmptyTable() {
+      for (a = 0; a < rowsAvailableFromBackend; a++) {
+        var newTableRow = $("<tr>");
+        newTableRow.attr("id", "row" + a);
+        newTableRow.appendTo(tbody);
+        for (b = 0; b < statsArr.length; b++) {
+          var newTableData = $("<td>");
+          newTableData.attr("id", `${statsArr[b]}${a}`);
+          newTableData.attr("class", "has-text-centered");
+          newTableData.appendTo($(`#row${a}`));
+        }
       }
+    }
+
+    // Delete existing rows, if any, then create new rows
+    if ($("#tbody tr").length === 0) {
+      createEmptyTable();
+    } else {
+      $("#tbody tr").remove();
+      createEmptyTable();
     }
 
     // Insert data into table
