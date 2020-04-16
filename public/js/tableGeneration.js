@@ -160,8 +160,8 @@ function displayResponse(CovidData) {
     for (c = 0; c < rowsAvailableFromBackend; c++) {
       // $(`#country${c}`).attr("class", "is-vertical-center");
       $(`#country${c}`).text(searchedStats[c].country);
-      $(`#country${c}`).append(
-        ` <img src="https://www.countryflags.io/${countryAbbr}/flat/16.png"></img>`
+      $(`#country${c}`).prepend(
+        ` <img src="https://www.countryflags.io/${countryAbbr}/flat/16.png" class="icon-flag"></img> `
       );
       // $(`#countryFlag${c}`).text("Flag");
       if (searchedStats[c].province === "") {
