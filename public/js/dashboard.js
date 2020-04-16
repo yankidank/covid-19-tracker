@@ -10,6 +10,7 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+      $('#countTitle').text('Global Statistics');
       $('#countConfirmed').text(numberWithCommas(response.Global.TotalConfirmed));
       $('#countRecovered').text(numberWithCommas(response.Global.TotalRecovered));
       $('#countDeaths').text(numberWithCommas(response.Global.TotalDeaths));
