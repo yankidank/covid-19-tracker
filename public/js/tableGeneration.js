@@ -148,7 +148,8 @@ function displayAllOnLanding() {
     displayResponse(response);
   });
 }
-displayAllOnLanding();
+
+// setTimeout(displayAllOnLanding(), 5000);
 
 // function displayAllOnLanding() {
 //   var queryURL =
