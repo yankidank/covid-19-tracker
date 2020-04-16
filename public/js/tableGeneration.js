@@ -1,3 +1,7 @@
+// import {flagConvert} from `./flagConvert.js`
+
+console.log(flagConvert.Andorra);
+
 function buildQueryURL() {
   // queryURL is the url we'll use to query the API
   var queryURL =
@@ -102,6 +106,21 @@ function displayResponse(CovidData) {
     var searchedStats = CovidData.data.covid19Stats;
     console.log(searchedStats);
 
+    var country_input = $("#country_input").val().trim();
+    country_input = country_input.toLowerCase();
+
+    //special case for US
+    if (country_input == "us") {
+      //capitalize both letters, so that we get "US"
+      country_input = country_input.toUpperCase();
+    } else {
+      //capitalize the first letter of the country name
+      country_input = country_input[0].toUpperCase() + country_input.slice(1);
+    }
+    console.log(country_input);
+    var countryAbbr = flagConvert[country_input];
+    console.log(countryAbbr);
+
     var statsArr = [
       "country",
       "province",
@@ -139,10 +158,20 @@ function displayResponse(CovidData) {
 
     // Insert data into table
     for (c = 0; c < rowsAvailableFromBackend; c++) {
+      // $(`#country${c}`).attr("class", "is-vertical-center");
       $(`#country${c}`).text(searchedStats[c].country);
-      searchedStats[c].province === ""
-        ? $(`#province${c}`).text("-")
-        : $(`#province${c}`).text(searchedStats[c].province);
+      $(`#country${c}`).append(
+        ` <img src="https://www.countryflags.io/${countryAbbr}/flat/16.png"></img>`
+      );
+      // $(`#countryFlag${c}`).text("Flag");
+      if (searchedStats[c].province === "") {
+        $(`#province${c}`).text("-");
+        // $(`#province${c}`).text(searchedStats[c].province);
+      } else if (searchedStats[c].province === "Recovered") {
+        $(`#row${c}`).remove();
+      } else {
+        $(`#province${c}`).text(searchedStats[c].province);
+      }
       searchedStats[c].city === ""
         ? $(`#city${c}`).text("-")
         : $(`#city${c}`).text(searchedStats[c].city);
@@ -206,10 +235,11 @@ function displayAllOnLanding() {
       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
     },
   }).then(function (response) {
-    displayResponse(response);
+    // displayResponse(response);
   });
 }
 
+displayAllOnLanding();
 // setTimeout(displayAllOnLanding(), 5000);
 
 // function displayAllOnLanding() {
