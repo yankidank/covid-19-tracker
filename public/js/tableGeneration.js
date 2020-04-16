@@ -128,7 +128,7 @@ function displayResponse(CovidData) {
     if (country_input){
       country_input = country_input.toLowerCase();
       //special case for US
-      if (country_input === "Us" || country_input === "us" || country_input === "USA" || country_input === "Usa" || country_input === "United States" || country_input === "America" || country_input === "U.S." || country_input === "U.S.A.") {
+      if (country_input === "Us" || country_input === "us" || country_input === "usa" || country_input === "USA" || country_input === "Usa" || country_input === "United States" || country_input === "America" || country_input === "U.S." || country_input === "U.S.A.") {
         //capitalize both letters, so that we get "US"
         //country_input = country_input.toUpperCase();
         country_input = 'US';
@@ -196,9 +196,11 @@ function displayResponse(CovidData) {
     for (c = 0; c < rowsAvailableFromBackend; c++) {
       // $(`#country${c}`).attr("class", "is-vertical-center");
       $(`#country${c}`).text(searchedStats[c].country);
-      $(`#country${c}`).prepend(
-        ` <img src="https://www.countryflags.io/${countryAbbr}/flat/16.png" class="icon-flag"></img> `
-      );
+      if (countryAbbr != undefined){
+        $(`#country${c}`).prepend(
+          `<img src="https://www.countryflags.io/${countryAbbr}/flat/16.png" class="icon-flag"></img> `
+        );
+      }
       // $(`#countryFlag${c}`).text("Flag");
       if (searchedStats[c].province === "") {
         $(`#province${c}`).text("-");
