@@ -79,7 +79,8 @@ $(document).ready(function() {
   }
 
   // Request User's Location
-/*   async function getLocation() {
+/*   
+  async function getLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log('Location from Browser')
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -91,11 +92,11 @@ $(document).ready(function() {
         ipSearch().then()
       }
     });
-  } */
-  
+  }
   function showPosition(position) { 
     generateMap(position.coords.latitude, position.coords.longitude)
   }
+*/
 
   // Add heatmap data
   addressPoints = addressPoints.map(function (p) {

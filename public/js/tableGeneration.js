@@ -17,11 +17,11 @@ function buildQueryURL(country) {
   var country_input
   // Grab text the user typed into the search input, add to the queryParams object
   if (country){
-    console.log(country)
     country_input = String(country);
   } else {
     country_input = String($("#country_input").val().trim());
   }
+  console.log(country_input)
 
   // If country is passed as a parameter, override the input field
   if (country){
@@ -225,7 +225,6 @@ function displayResponse(CovidData) {
 }
 
 $("#run-search").on("click", performSearch);
-$("#run-geolocate").on("click", performSearch);
 
 // Auto-search partial input with a delay
 // Adds additional search after user presses enter or clicks button =(
