@@ -82,6 +82,9 @@ function displayResponse(CovidData) {
       searchedStats[c].province === ""
         ? $(`#province${c}`).text("-")
         : $(`#province${c}`).text(searchedStats[c].province);
+      searchedStats[c].province === "Recovered"
+        ? $(`#row${c}`).remove()
+        : $(`#province${c}`).text(searchedStats[c].province);
       searchedStats[c].city === ""
         ? $(`#city${c}`).text("-")
         : $(`#city${c}`).text(searchedStats[c].city);
@@ -145,10 +148,11 @@ function displayAllOnLanding() {
       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
     },
   }).then(function (response) {
-    displayResponse(response);
+    // displayResponse(response);
   });
 }
 
+displayAllOnLanding();
 // setTimeout(displayAllOnLanding(), 5000);
 
 // function displayAllOnLanding() {
