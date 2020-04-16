@@ -57,3 +57,13 @@ form.login {
 .navbar.box {
   border-radius:0;
 }
+
+#run-geolocate {
+  display: inline-block;
+  background:#f5f5f5;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px #888;
+}
+#run-geolocate .icon {
+  opacity: 0.7;
+}
