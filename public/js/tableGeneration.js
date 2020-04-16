@@ -39,7 +39,7 @@ function buildQueryURL() {
 function displayResponse(CovidData) {
   $(document).ready(function () {
     var searchedStats = CovidData.data.covid19Stats;
-    // console.log(searchedStats);
+    console.log(searchedStats);
 
     var statsArr = [
       "country",
@@ -52,29 +52,43 @@ function displayResponse(CovidData) {
     ];
 
     var rowsAvailableFromBackend = searchedStats.length;
-    for (rowNum = 0; rowNum < rowsAvailableFromBackend; rowNum++) {
-      var newTableRow = $("<tr>");
-      newTableRow.attr("id", "row" + rowNum);
-      newTableRow.appendTo(tbody);
-      for (colNum = 0; colNum < statsArr.length; colNum++) {
-        var newTableData = $("<td>");
-        newTableData.attr("id", statsArr[colNum] + rowNum);
-        newTableData.attr("class", "has-text-centered");
-        // for (a = 0; a < statsArr.length; a++) {
-        // console.log(searchedStats[0].statsArr[0])
-        // console.log(searchedStats);
-        // console.log(searchedStats.length);
-        // for (b = 0; b < searchedStats.length; b++) {
-        $(`#country${rowNum}`).text(searchedStats[rowNum].country);
-        $(`#province${rowNum}`).text(searchedStats[rowNum].province);
-        $(`#city${rowNum}`).text(searchedStats[rowNum].city);
-        $(`#confirmed${rowNum}`).text(searchedStats[rowNum].confirmed);
-        $(`#deaths${rowNum}`).text(searchedStats[rowNum].deaths);
-        $(`#lastUpdate${rowNum}`).text(searchedStats[rowNum].lastUpdate);
-        // }
-        // }
-        newTableData.appendTo($("#row" + rowNum));
+
+    // Create empty rows and table data cells equal to the number provided by API
+    function createEmptyTable() {
+      for (a = 0; a < rowsAvailableFromBackend; a++) {
+        var newTableRow = $("<tr>");
+        newTableRow.attr("id", "row" + a);
+        newTableRow.appendTo(tbody);
+        for (b = 0; b < statsArr.length; b++) {
+          var newTableData = $("<td>");
+          newTableData.attr("id", `${statsArr[b]}${a}`);
+          newTableData.attr("class", "has-text-centered");
+          newTableData.appendTo($(`#row${a}`));
+        }
       }
+    }
+
+    // Delete existing rows, if any, then create new rows
+    if ($("#tbody tr").length === 0) {
+      createEmptyTable();
+    } else {
+      $("#tbody tr").remove();
+      createEmptyTable();
+    }
+
+    // Insert data into table
+    for (c = 0; c < rowsAvailableFromBackend; c++) {
+      $(`#country${c}`).text(searchedStats[c].country);
+      searchedStats[c].province === ""
+        ? $(`#province${c}`).text("-")
+        : $(`#province${c}`).text(searchedStats[c].province);
+      searchedStats[c].city === ""
+        ? $(`#city${c}`).text("-")
+        : $(`#city${c}`).text(searchedStats[c].city);
+      $(`#confirmed${c}`).text(searchedStats[c].confirmed);
+      $(`#deaths${c}`).text(searchedStats[c].deaths);
+      $(`#recovered${c}`).text(searchedStats[c].recovered);
+      $(`#lastUpdate${c}`).text(searchedStats[c].lastUpdate);
     }
   });
 }
@@ -98,13 +112,12 @@ $('#country_input').keyup(delay(function (e) {
   performSearch();
 }, 1000)); */
 
-$("#country_filter").submit(function(event){
-  event.preventDefault();  
+$("#country_filter").submit(function (event) {
+  event.preventDefault();
   performSearch();
 });
 
 function performSearch() {
-
   var queryURL = buildQueryURL();
 
   $.ajax({
@@ -119,7 +132,25 @@ function performSearch() {
   }).then(displayResponse);
 }
 
-// function searchAll() {
+function displayAllOnLanding() {
+  var queryURL =
+    "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
+  $.ajax({
+    async: true,
+    crossDomain: true,
+    url: queryURL,
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
+      "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
+    },
+  }).then(function (response) {
+    displayResponse(response);
+  });
+}
+displayAllOnLanding();
+
+// function displayAllOnLanding() {
 //   var queryURL =
 //     "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
 //   $.ajax({
@@ -132,8 +163,7 @@ function performSearch() {
 //       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
 //     },
 //   }).then(function (response) {
-//     var allStats = response.data.covid19Stats;
-
+//     displayResponse(response);
 //     // for (a = 0; a < allStats.length; a++) {
 //     //   if (allStats[a].country == "US") {
 //     // console.log(allStats[a]);
@@ -142,4 +172,4 @@ function performSearch() {
 //   });
 // }
 
-// searchAll();
+// displayAllOnLanding();
