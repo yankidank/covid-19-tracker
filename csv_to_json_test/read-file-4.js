@@ -32,10 +32,10 @@ function process_files(report_version, column_version, date_version){
 
                 // create a new connection to the database
                 const connection = mysql.createConnection({
-                host: "localhost",
+                host: "127.0.0.1",
                 port: 3306,
                 user: "root",
-                password: "password",
+                password: null,
                 database: "covid19"
                 });
 
