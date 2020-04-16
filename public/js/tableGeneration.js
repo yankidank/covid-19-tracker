@@ -132,7 +132,25 @@ function performSearch() {
   }).then(displayResponse);
 }
 
-// function searchAll() {
+function displayAllOnLanding() {
+  var queryURL =
+    "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
+  $.ajax({
+    async: true,
+    crossDomain: true,
+    url: queryURL,
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
+      "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
+    },
+  }).then(function (response) {
+    displayResponse(response);
+  });
+}
+displayAllOnLanding();
+
+// function displayAllOnLanding() {
 //   var queryURL =
 //     "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
 //   $.ajax({
@@ -145,8 +163,7 @@ function performSearch() {
 //       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
 //     },
 //   }).then(function (response) {
-//     var allStats = response.data.covid19Stats;
-
+//     displayResponse(response);
 //     // for (a = 0; a < allStats.length; a++) {
 //     //   if (allStats[a].country == "US") {
 //     // console.log(allStats[a]);
@@ -155,4 +172,4 @@ function performSearch() {
 //   });
 // }
 
-// searchAll();
+// displayAllOnLanding();
