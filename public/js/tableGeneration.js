@@ -1,6 +1,6 @@
 // import {flagConvert} from `./flagConvert.js`
 
-console.log(flagConvert.Andorra);
+//console.log(flagConvert.Andorra);
 
 function buildQueryURL() {
   // queryURL is the url we'll use to query the API
@@ -19,13 +19,15 @@ function buildQueryURL() {
   var country_input = $("#country_input").val().trim();
   country_input = country_input.toLowerCase();
 
-  //special case for US
-  if (country_input === "us") {
-    //capitalize both letters, so that we get "US"
-    country_input = country_input.toUpperCase();
-  } else {
-    //capitalize the first letter of the country name
-    country_input = country_input[0].toUpperCase() + country_input.slice(1);
+  if (country_input){
+    //special case for US
+    if (country_input === "us") {
+      //capitalize both letters, so that we get "US"
+      country_input = country_input.toUpperCase();
+    } else {
+      //capitalize the first letter of the country name
+      country_input = country_input[0].toUpperCase() + country_input.slice(1);
+    }
   }
 
   function getCountryStats(){
@@ -104,22 +106,42 @@ function buildQueryURL() {
 function displayResponse(CovidData) {
   $(document).ready(function () {
     var searchedStats = CovidData.data.covid19Stats;
-    console.log(searchedStats);
+    //console.log(searchedStats);
 
     var country_input = $("#country_input").val().trim();
-    country_input = country_input.toLowerCase();
+    if (country_input){
+      country_input = country_input.toLowerCase();
+      console.log('1:'+country_input)
+      //special case for US
+      if (country_input === "Us" || country_input === "us" || country_input === "USA" || country_input === "Usa" || country_input === "United States" || country_input === "America" || country_input === "U.S." || country_input === "U.S.A.") {
+        //capitalize both letters, so that we get "US"
+        //country_input = country_input.toUpperCase();
+        country_input = 'US';
+      } else {
+        //capitalize the first letter of the country name
+        country_input = country_input[0].toUpperCase() + country_input.slice(1);
+      }
+      console.log('2:'+country_input)
 
-    //special case for US
-    if (country_input == "us") {
-      //capitalize both letters, so that we get "US"
-      country_input = country_input.toUpperCase();
-    } else {
-      //capitalize the first letter of the country name
-      country_input = country_input[0].toUpperCase() + country_input.slice(1);
+      // Data sort and filter
+      var dataFiltered = CovidData.data.covid19Stats
+        .filter(city => city.deaths > 0) // Filter out 0 Deaths
+        .sort((c1, c2) => c2.deaths - c1.deaths) // Sort by Deaths DESC
+
+  /*     if (country_input === "US" ) {
+        console.log('USA Baby!')
+        dataFiltered
+          .filter(city => city.country = 'US')
+          .filter(city => city.city != '')
+          .filter(city => city.province != '')
+      } */
+
+      console.log(dataFiltered)
+      // Update to filtered data
+      searchedStats = dataFiltered
     }
-    console.log(country_input);
+    
     var countryAbbr = flagConvert[country_input];
-    console.log(countryAbbr);
 
     var statsArr = [
       "country",
@@ -160,8 +182,8 @@ function displayResponse(CovidData) {
     for (c = 0; c < rowsAvailableFromBackend; c++) {
       // $(`#country${c}`).attr("class", "is-vertical-center");
       $(`#country${c}`).text(searchedStats[c].country);
-      $(`#country${c}`).append(
-        ` <img src="https://www.countryflags.io/${countryAbbr}/flat/16.png"></img>`
+      $(`#country${c}`).prepend(
+        ` <img src="https://www.countryflags.io/${countryAbbr}/flat/16.png" class="icon-flag"></img> `
       );
       // $(`#countryFlag${c}`).text("Flag");
       if (searchedStats[c].province === "") {
@@ -180,6 +202,8 @@ function displayResponse(CovidData) {
       $(`#recovered${c}`).text(searchedStats[c].recovered);
       $(`#lastUpdate${c}`).text(searchedStats[c].lastUpdate);
     }
+    $("#icon-search").toggleClass("fa-search")
+    $("#icon-search").toggleClass("fa-spinner fa-pulse")
   });
 }
 
@@ -208,6 +232,10 @@ $("#country_filter").submit(function (event) {
 });
 
 function performSearch() {
+  console.log('Search performed...')
+  $("#icon-search").toggleClass("fa-search")
+  $("#icon-search").toggleClass("fa-spinner fa-pulse")
+
   var queryURL = buildQueryURL();
 
   $.ajax({
@@ -220,6 +248,7 @@ function performSearch() {
       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
     },
   }).then(displayResponse);
+
 }
 
 function displayAllOnLanding() {

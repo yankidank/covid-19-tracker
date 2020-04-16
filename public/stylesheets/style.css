@@ -50,3 +50,10 @@ form.login {
 .is-danger {
   background-color: #c72543  !important;
 }
+.icon-flag {
+  vertical-align: middle;
+  margin-bottom:1px;
+}
+.navbar.box {
+  border-radius:0;
+}
