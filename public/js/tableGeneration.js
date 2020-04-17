@@ -115,10 +115,10 @@ function buildQueryURL(country) {
           resArr[0].TotalRecovered &&
           resArr[0].TotalDeaths
         ) {
-          $("#countTitle").text(country_input + " Statistics");
-          $("#countConfirmed").text(numberWithCommas(resArr[0].TotalConfirmed));
-          $("#countRecovered").text(numberWithCommas(resArr[0].TotalRecovered));
-          $("#countDeaths").text(numberWithCommas(resArr[0].TotalDeaths));
+          $("#countryTitle").text(country_input + " Statistics");
+          $("#countryConfirmed").text(numberWithCommas(resArr[0].TotalConfirmed));
+          $("#countryRecovered").text(numberWithCommas(resArr[0].TotalRecovered));
+          $("#countryDeaths").text(numberWithCommas(resArr[0].TotalDeaths));
         }
       })
       .catch(function (error) {
