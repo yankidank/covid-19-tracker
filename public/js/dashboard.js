@@ -186,6 +186,16 @@ $(document).ready(function() {
       $('.buttons').css("display", "block");
     }
   });
+  setTimeout(function(){
+    // Regenerate the map (hotfix)
+    // Add heatmap data
+    addressPoints = addressPoints.map(function (p) {
+      return [p[0], p[1]];
+    });
+    //generateMap()
+    getMapData().then(generateMap);
+    L.heatLayer(addressPoints).addTo(map), draw = true;
+  }, 1500);
 });
 // User Login/Signup Modal
 $("#auth-signup").click(function() {
