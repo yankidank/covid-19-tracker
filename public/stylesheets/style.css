@@ -31,6 +31,10 @@ form.login {
   margin-left:11px;
   margin-top:13px;
 }
+.member-name .b-checkbox {
+  margin-left: 3px;
+  margin-top: 2px;
+}
 .b-checkbox label {
   padding-left: 12px;
 }
@@ -87,4 +91,7 @@ form.login {
 }
 #globalDeaths {
   color:#c72543;
+}
+.fa {
+  font-family: "Font Awesome 5 Free", "FontAwesome";
 }
