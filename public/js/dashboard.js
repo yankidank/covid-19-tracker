@@ -137,7 +137,7 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     if (data.email){      
       $('.buttons').css("display", "none");
-      $(".member-name").text('Welcome Back '+data.email);
+      $(".member-name").text('Welcome '+data.email);
       $(".member-name").append(' | <a href="./logout">Logout</a>')
       //console.log(data.subscription)
       if (data.subscription){
