@@ -29,6 +29,15 @@ module.exports = function(app) {
       });
   });
 
+  app.get("/api/users", function(req, res){
+    db.User.findAll({
+      attributes: ['email'],
+      order:[['email', 'ASC']]
+    }).then(function(dbStats){
+      res.json(dbStats);
+    });
+  });
+
   app.put("/api/subscribe/:userId", function (req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
