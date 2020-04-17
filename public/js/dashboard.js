@@ -29,7 +29,7 @@ $(document).ready(function() {
       method: "GET"
     }).then(function(response) {
       console.log(response)
-      $('#countryTitle').text('United States Statistic');
+      $('#countryTitle').text('United States Statistics');
       $('#countryConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
       $('#countryRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
       $('#countryDeaths').text(numberWithCommas(response.Countries[235].TotalDeaths));
