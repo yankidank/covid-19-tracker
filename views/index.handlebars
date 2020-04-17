@@ -34,28 +34,22 @@
     </div>
     </div>
 </nav>
-{{!-- <nav class="navbar"> --}}
-<div class="columns">
-    <div class="column is-one-third">
-        <div class="notification is-primary">
-            <div id="countConfirmed" class="has-text-centered is-size-6">1,000,000</div>
-            <div class="has-text-centered is-size-8">Global Confirmed</div>
-        </div>
-    </div>
-    <div class="column is-one-third">
-        <div class="notification is-link">
-            <div id="countRecovered" class="has-text-centered is-size-6">80,000</div>
-            <div class="has-text-centered is-size-8">Global Recovered</div>
-        </div>
-    </div>
-    <div class="column is-one-third">
-        <div class="notification is-danger">
-            <div id="countDeaths" class="has-text-centered is-size-6">10,000</div>
-            <div class="has-text-centered is-size-8">Global Deaths</div>
-        </div>
-    </div>
-</div>
-{{!-- </nav> --}}
+<nav class="breadcrumb no-separator is-centered is-medium" aria-label="breadcrumbs">
+  <ul>
+    <li>
+        <strong>Global Data:</strong> 
+    </li>
+    <li>
+        <div id="globalConfirmed" class="breadcrumb-data"> - Positive Cases</div>
+    </li>
+    <li>
+        <div id="globalRecovered" class="breadcrumb-data"> - Recoveries</div>
+    </li>
+    <li>        
+        <div id="globalDeaths" class="breadcrumb-data"> - Deaths</div>
+    </li>
+  </ul>
+</nav>
 <div class="columns">
     <div class="column is-three-quarters" id="map"></div>
     <div class="column is-narrow is-one-quarter stats">
