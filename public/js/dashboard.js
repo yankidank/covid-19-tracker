@@ -11,7 +11,6 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      $('#countTitle').text('Global Statistics');
       $('#countConfirmed').text(numberWithCommas(response.Global.TotalConfirmed));
       $('#countRecovered').text(numberWithCommas(response.Global.TotalRecovered));
       $('#countDeaths').text(numberWithCommas(response.Global.TotalDeaths));
@@ -20,6 +19,24 @@ $(document).ready(function() {
     });
   }
   getGlobalStats()
+
+  // US Stats
+  function getUSAStats(){
+    var queryURL = "https://api.covid19api.com/summary";
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response)
+      $('#countryTitle').text('United States Statistic');
+      $('#countryConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
+      $('#countryRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
+      $('#countryDeaths').text(numberWithCommas(response.Countries[235].TotalDeaths));
+    }).catch(function(error){
+      console.log(error)
+    });
+  }
+  getUSAStats()
 
   // Heatmap Data 
   var addressPoints = []
