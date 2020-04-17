@@ -11,9 +11,10 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      $('#countConfirmed').text(numberWithCommas(response.Global.TotalConfirmed));
-      $('#countRecovered').text(numberWithCommas(response.Global.TotalRecovered));
-      $('#countDeaths').text(numberWithCommas(response.Global.TotalDeaths));
+      $('#globalTitle').text('Global Statistics');
+      $('#globalConfirmed').text(numberWithCommas(response.Global.TotalConfirmed+' Positive Cases'));
+      $('#globalRecovered').text(numberWithCommas(response.Global.TotalRecovered+' Recoveries'));
+      $('#globalDeaths').text(numberWithCommas(response.Global.TotalDeaths+' Deaths'));
     }).catch(function(error){
       console.log(error)
     });

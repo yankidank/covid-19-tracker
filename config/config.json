@@ -1,7 +1,11 @@
 {
   "development": {
     "username": "root",
+<<<<<<< HEAD
     "password": "root",
+=======
+    "password": "",
+>>>>>>> e7e3a365b6bb71fd41983936a120449e668a0f34
     "database": "covid19",
     "host": "127.0.0.1",
     "dialect": "mysql"
