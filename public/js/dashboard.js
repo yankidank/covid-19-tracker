@@ -11,15 +11,39 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+<<<<<<< HEAD
       $('#globalTitle').text('Global Statistics');
       $('#globalConfirmed').text(numberWithCommas(response.Global.TotalConfirmed+' Positive Cases'));
       $('#globalRecovered').text(numberWithCommas(response.Global.TotalRecovered+' Recoveries'));
       $('#globalDeaths').text(numberWithCommas(response.Global.TotalDeaths+' Deaths'));
+=======
+      $('#countConfirmed').text(numberWithCommas(response.Global.TotalConfirmed));
+      $('#countRecovered').text(numberWithCommas(response.Global.TotalRecovered));
+      $('#countDeaths').text(numberWithCommas(response.Global.TotalDeaths));
+>>>>>>> 1024579f7636aee5219de6858c1cd77233791b4e
     }).catch(function(error){
       console.log(error)
     });
   }
   getGlobalStats()
+
+  // US Stats
+  function getUSAStats(){
+    var queryURL = "https://api.covid19api.com/summary";
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response)
+      $('#countryTitle').text('United States Statistic');
+      $('#countryConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
+      $('#countryRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
+      $('#countryDeaths').text(numberWithCommas(response.Countries[235].TotalDeaths));
+    }).catch(function(error){
+      console.log(error)
+    });
+  }
+  getUSAStats()
 
   // Heatmap Data 
   var addressPoints = []
