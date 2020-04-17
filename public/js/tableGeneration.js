@@ -14,7 +14,7 @@ function buildQueryURL(country) {
   //     "api-key": "b2dec6e1b6mshd60cb05bc70bdfap14e2acjsnc1a94c703cf1"
   // };
 
-  var country_input
+  var country_input;
   // Grab text the user typed into the search input, add to the queryParams object
   if (country){
     country_input = String(country);
@@ -24,14 +24,14 @@ function buildQueryURL(country) {
   console.log(country_input)
 
   // If country is passed as a parameter, override the input field
-  if (country){
-    country_input = country
+  if (country) {
+    country_input = country;
   }
 
-  country_input = String(country_input)
+  country_input = String(country_input);
   country_input = country_input.toLowerCase();
 
-  if (country_input){
+  if (country_input) {
     //special case for US
     if (country_input === "us") {
       //capitalize both letters, so that we get "US"
@@ -42,70 +42,91 @@ function buildQueryURL(country) {
     }
   }
 
-  function getCountryStats(country_input){
-
+  function getCountryStats(country_input) {
     // Correct common country names to match API
-    if (country_input === "us" || country_input === "US" || country_input === "USA" || country_input === "United States" || country_input === "America" || country_input === "U.S." || country_input === "U.S.A.") {
+    if (
+      country_input === "us" ||
+      country_input === "US" ||
+      country_input === "USA" ||
+      country_input === "United States" ||
+      country_input === "America" ||
+      country_input === "U.S." ||
+      country_input === "U.S.A."
+    ) {
       country_input = "United States of America";
-    } else if (country_input === "UK" || country_input === "Britain"){
-      country_input = "United Kingdom"
-    } else if (country_input === "Vatican" || country_input === "Vatican City"){
-      country_input = "Holy See (Vatican City State)"
-    } else if (country_input === "Hong Kong"){
-      country_input = "Hong Kong, SAR China"
-    } else if (country_input === "Saint-Martin"){
-      country_input = "Saint-Martin (French part)"
-    } else if (country_input === "Russia"){
-      country_input = "Russian Federation"
-    } else if (country_input === "Republic of Macedonia" || country_input === "Macedonia"){
-      country_input = "Macedonia, Republic of"
-    } else if (country_input === "Macao"){
-      country_input = "Macao, SAR China"
-    } else if (country_input === "North Korea"){
-      country_input = "Korea (North)"
-    } else if (country_input === "South Korea"){
-      country_input = "Korea (South)"
-    } else if (country_input === "Iran"){
-      country_input = "Iran, Islamic Republic of"
-    } else if (country_input === "Syria" || country_input === "Syrian Arab Republic"){
-      country_input = "Syrian Arab Republic (Syria)"
-    } else if (country_input === "Taiwan"){
-      country_input = "Taiwan, Republic of China"
-    } else if (country_input === "Tanzania"){
-      country_input = "Tanzania, United Republic of"
-    } else if (country_input === "Trinidad" || country_input === "Tobago"){
-      country_input = "Trinidad and Tobago"
-    } else if (country_input === "Venezuela"){
-      country_input = "Venezuela (Bolivarian Republic)"
+    } else if (country_input === "UK" || country_input === "Britain") {
+      country_input = "United Kingdom";
+    } else if (
+      country_input === "Vatican" ||
+      country_input === "Vatican City"
+    ) {
+      country_input = "Holy See (Vatican City State)";
+    } else if (country_input === "Hong Kong") {
+      country_input = "Hong Kong, SAR China";
+    } else if (country_input === "Saint-Martin") {
+      country_input = "Saint-Martin (French part)";
+    } else if (country_input === "Russia") {
+      country_input = "Russian Federation";
+    } else if (
+      country_input === "Republic of Macedonia" ||
+      country_input === "Macedonia"
+    ) {
+      country_input = "Macedonia, Republic of";
+    } else if (country_input === "Macao") {
+      country_input = "Macao, SAR China";
+    } else if (country_input === "North Korea") {
+      country_input = "Korea (North)";
+    } else if (country_input === "South Korea") {
+      country_input = "Korea (South)";
+    } else if (country_input === "Iran") {
+      country_input = "Iran, Islamic Republic of";
+    } else if (
+      country_input === "Syria" ||
+      country_input === "Syrian Arab Republic"
+    ) {
+      country_input = "Syrian Arab Republic (Syria)";
+    } else if (country_input === "Taiwan") {
+      country_input = "Taiwan, Republic of China";
+    } else if (country_input === "Tanzania") {
+      country_input = "Tanzania, United Republic of";
+    } else if (country_input === "Trinidad" || country_input === "Tobago") {
+      country_input = "Trinidad and Tobago";
+    } else if (country_input === "Venezuela") {
+      country_input = "Venezuela (Bolivarian Republic)";
     } else if (country_input === "Vietnam") {
-      country_input = "Viet Nam"
+      country_input = "Viet Nam";
     }
 
     var queryURL = "https://api.covid19api.com/summary";
     $.ajax({
       url: queryURL,
-      method: "GET"
-    }).then(function(response) {
-      function countryFilter(country) {
-        return country.Country === country_input;
-      }
-      var countryResponse = response.Countries
-      var resArr = countryResponse.filter(countryFilter);
-      console.log(resArr[0])
-      console.log('Update HTML')
-      if (resArr[0].TotalConfirmed && resArr[0].TotalRecovered && resArr[0].TotalDeaths){
-        $('#countTitle').text(country_input+' Statistics');
-        $('#countConfirmed').text(numberWithCommas(resArr[0].TotalConfirmed));
-        $('#countRecovered').text(numberWithCommas(resArr[0].TotalRecovered));
-        $('#countDeaths').text(numberWithCommas(resArr[0].TotalDeaths));
-      }
-      
-    }).catch(function(error){
-      console.log(error)
-    });
+      method: "GET",
+    })
+      .then(function (response) {
+        function countryFilter(country) {
+          return country.Country === country_input;
+        }
+        var countryResponse = response.Countries;
+        var resArr = countryResponse.filter(countryFilter);
+        console.log(resArr[0]);
+        console.log("Update HTML");
+        if (
+          resArr[0].TotalConfirmed &&
+          resArr[0].TotalRecovered &&
+          resArr[0].TotalDeaths
+        ) {
+          $("#countTitle").text(country_input + " Statistics");
+          $("#countConfirmed").text(numberWithCommas(resArr[0].TotalConfirmed));
+          $("#countRecovered").text(numberWithCommas(resArr[0].TotalRecovered));
+          $("#countDeaths").text(numberWithCommas(resArr[0].TotalDeaths));
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  if (country_input){
-    getCountryStats(country_input)
+  if (country_input) {
+    getCountryStats(country_input);
   }
 
   queryParams.country = country_input;
@@ -125,24 +146,34 @@ function displayResponse(CovidData) {
     //console.log(searchedStats);
 
     var country_input = $("#country_input").val().trim();
-    if (country_input){
+    if (country_input) {
       country_input = country_input.toLowerCase();
       //special case for US
-      if (country_input === "Us" || country_input === "us" || country_input === "usa" || country_input === "USA" || country_input === "Usa" || country_input === "United States" || country_input === "America" || country_input === "U.S." || country_input === "U.S.A.") {
+      if (
+        country_input === "Us" ||
+        country_input === "us" ||
+        country_input === "usa" ||
+        country_input === "USA" ||
+        country_input === "Usa" ||
+        country_input === "United States" ||
+        country_input === "America" ||
+        country_input === "U.S." ||
+        country_input === "U.S.A."
+      ) {
         //capitalize both letters, so that we get "US"
         //country_input = country_input.toUpperCase();
-        country_input = 'US';
+        country_input = "US";
       } else {
         //capitalize the first letter of the country name
         country_input = country_input[0].toUpperCase() + country_input.slice(1);
       }
 
       // Data sort and filter
-      var dataFiltered = CovidData.data.covid19Stats
-        .filter(city => city.deaths > 0) // Filter out 0 Deaths
-        .sort((c1, c2) => c2.deaths - c1.deaths) // Sort by Deaths DESC
+      // var dataFiltered = CovidData.data.covid19Stats;
+      // .filter(city => city.deaths > 0) // Filter out 0 Deaths
+      // .sort((c1, c2) => c2.deaths - c1.deaths) // Sort by Deaths DESC
 
-  /*     if (country_input === "US" ) {
+      /*     if (country_input === "US" ) {
         console.log('USA Baby!')
         dataFiltered
           .filter(city => city.country = 'US')
@@ -152,9 +183,9 @@ function displayResponse(CovidData) {
       //console.log(dataFiltered)
 
       // Update to filtered data
-      searchedStats = dataFiltered
+      // searchedStats = dataFiltered;
     }
-    
+
     var countryAbbr = flagConvert[country_input];
 
     var statsArr = [
@@ -219,8 +250,8 @@ function displayResponse(CovidData) {
       $(`#lastUpdate${c}`).text(searchedStats[c].lastUpdate);
     }
     // End icon animation
-    $("#icon-search").toggleClass("fa-search")
-    $("#icon-search").toggleClass("fa-spinner fa-pulse")
+    $("#icon-search").toggleClass("fa-search");
+    $("#icon-search").toggleClass("fa-spinner fa-pulse");
   });
 }
 
@@ -250,8 +281,8 @@ $("#country_filter").submit(function (event) {
 
 function performSearch(countryQuery) {
   // Begin icon animation
-  $("#icon-search").toggleClass("fa-search")
-  $("#icon-search").toggleClass("fa-spinner fa-pulse")
+  $("#icon-search").toggleClass("fa-search");
+  $("#icon-search").toggleClass("fa-spinner fa-pulse");
   var queryURL = buildQueryURL(countryQuery);
   $.ajax({
     async: true,
@@ -263,7 +294,6 @@ function performSearch(countryQuery) {
       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
     },
   }).then(displayResponse);
-
 }
 
 function displayAllOnLanding() {
