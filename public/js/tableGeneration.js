@@ -16,12 +16,12 @@ function buildQueryURL(country) {
 
   var country_input;
   // Grab text the user typed into the search input, add to the queryParams object
-  if (country){
+  if (country) {
     country_input = String(country);
   } else {
     country_input = String($("#country_input").val().trim());
   }
-  console.log(country_input)
+  console.log(country_input);
 
   // If country is passed as a parameter, override the input field
   if (country) {
@@ -198,11 +198,12 @@ function displayResponse(CovidData) {
       "lastUpdate",
     ];
 
-    var rowsAvailableFromBackend = searchedStats.length;
+    var rowsAvailable =
+      searchedStats.length < 1000 ? searchedStats.length : 1000;
 
     // Create empty rows and table data cells equal to the number provided by API
     function createEmptyTable() {
-      for (a = 0; a < rowsAvailableFromBackend; a++) {
+      for (a = 0; a < rowsAvailable; a++) {
         var newTableRow = $("<tr>");
         newTableRow.attr("id", "row" + a);
         newTableRow.appendTo(tbody);
@@ -224,10 +225,10 @@ function displayResponse(CovidData) {
     }
 
     // Insert data into table
-    for (c = 0; c < rowsAvailableFromBackend; c++) {
+    for (c = 0; c < rowsAvailable; c++) {
       // $(`#country${c}`).attr("class", "is-vertical-center");
       $(`#country${c}`).text(searchedStats[c].country);
-      if (countryAbbr != undefined){
+      if (countryAbbr != undefined) {
         $(`#country${c}`).prepend(
           `<img src="https://www.countryflags.io/${countryAbbr}/flat/16.png" class="icon-flag"></img> `
         );
