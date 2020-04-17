@@ -67,3 +67,24 @@ form.login {
 #run-geolocate .icon {
   opacity: 0.7;
 }
+.breadcrumb li {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0 .75em;
+}
+.breadcrumb li+li::before {
+  color: #b5b5b5;
+  content: "\00BB";
+  margin-right:5px;
+  margin-bottom:3px;
+}
+#globalConfirmed {
+  color:#4277c5;
+}
+#globalRecovered {
+  color:#18b18e;
+}
+#globalDeaths {
+  color:#c72543;
+}

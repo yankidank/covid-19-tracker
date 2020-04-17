@@ -109,10 +109,10 @@ function sendNewsletter(){
           mailContent = mailContent9;
           console.log(mailContent)
         }, 2000);
-        setTimeout(function(){ 
+        setTimeout(function(){
           // Send email using nodemailer + sparkpost transport
           transporter.sendMail({
-            from: 'update@plague.email',
+            from: 'update@mail.plague.email',
             to: '@gmail.com',
             subject: 'Covid19 Newsletter for '+mailDate,
             html: mailContent
