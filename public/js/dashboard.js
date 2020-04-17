@@ -96,7 +96,8 @@ $(document).ready(function() {
   }
 
   // Request User's Location
-/*   async function getLocation() {
+/*   
+  async function getLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log('Location from Browser')
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -108,11 +109,11 @@ $(document).ready(function() {
         ipSearch().then()
       }
     });
-  } */
-  
+  }
   function showPosition(position) { 
     generateMap(position.coords.latitude, position.coords.longitude)
   }
+*/
 
   // Add heatmap data
   addressPoints = addressPoints.map(function (p) {
@@ -136,6 +137,7 @@ $(document).ready(function() {
     if (data.email){      
       $('.buttons').css("display", "none");
       $(".member-name").text('Welcome Back '+data.email);
+      $(".member-name").append(' | <a href="./logout">Logout</a>')
       //console.log(data.subscription)
       if (data.subscription){
         // Check it

@@ -112,7 +112,7 @@ function sendNewsletter(){
         setTimeout(function(){ 
           // Send email using nodemailer + sparkpost transport
           transporter.sendMail({
-            from: 'mail@mail.ericheikkinen.com',
+            from: 'update@plague.email',
             to: '@gmail.com',
             subject: 'Covid19 Newsletter for '+mailDate,
             html: mailContent
