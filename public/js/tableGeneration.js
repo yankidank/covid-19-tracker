@@ -169,9 +169,9 @@ function displayResponse(CovidData) {
       }
 
       // Data sort and filter
-      // var dataFiltered = CovidData.data.covid19Stats;
+      var dataFiltered = CovidData.data.covid19Stats
       // .filter(city => city.deaths > 0) // Filter out 0 Deaths
-      // .sort((c1, c2) => c2.deaths - c1.deaths) // Sort by Deaths DESC
+        .sort((c1, c2) => c2.deaths - c1.deaths) // Sort by Deaths DESC
 
       /*     if (country_input === "US" ) {
         console.log('USA Baby!')
@@ -183,7 +183,7 @@ function displayResponse(CovidData) {
       //console.log(dataFiltered)
 
       // Update to filtered data
-      // searchedStats = dataFiltered;
+      searchedStats = dataFiltered;
     }
 
     var countryAbbr = flagConvert[country_input];
