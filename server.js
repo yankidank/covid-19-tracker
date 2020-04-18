@@ -53,6 +53,21 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+var subscriberEmails
+db.User.findAll({
+  attributes: ['email'],
+  where:{
+    'subscription': true
+  },
+  order:[['email', 'ASC']]
+}).then(function(dbStats){
+  var subscriberArray = dbStats.map(function(item) {
+    return item['email'];
+  });
+  subscriberEmails = subscriberArray.toString()
+  console.log(subscriberEmails)
+})
+
 function sendNewsletter(){
   // Get Data for Newsletter
   request.get({
@@ -113,7 +128,8 @@ function sendNewsletter(){
           // Send email using nodemailer + sparkpost transport
           transporter.sendMail({
             from: 'update@mail.plague.email',
-            to: '@gmail.com',
+            to: 'subscribe@mail.plague.email',
+            bcc: subscriberEmails,
             subject: 'Covid19 Newsletter for '+mailDate,
             html: mailContent
           }, (err, info) => {

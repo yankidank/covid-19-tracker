@@ -29,16 +29,16 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/api/all_users", function(req, res){
+/*   app.get("/api/all_users", function(req, res){
     db.User.findAll({
       attributes: ['email'],
       order:[['email', 'ASC']]
     }).then(function(dbStats){
       res.json(dbStats);
     });
-  });
+  }); */
 
-  app.get("/api/subscribed_users", function(req, res){
+/*   app.get("/api/subscribed_users", function(req, res){
     db.User.findAll({
       attributes: ['email'],
       where:{
@@ -48,7 +48,7 @@ module.exports = function(app) {
     }).then(function(dbStats){
       res.json(dbStats);
     });
-  });
+  }); */
 
   app.put("/api/subscribe/:userId", function (req, res) {
     if (!req.user) {

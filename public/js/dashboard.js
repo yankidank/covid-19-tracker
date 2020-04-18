@@ -29,10 +29,17 @@ $(document).ready(function() {
       method: "GET"
     }).then(function(response) {
       console.log(response)
+<<<<<<< HEAD
       // $('#countryTitle').text('United States Statistic');
       $('#countConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
       $('#countRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
       $('#countDeaths').text(numberWithCommas(response.Countries[235].TotalDeaths));
+=======
+      $('#countryTitle').text('United States Statistics');
+      $('#countryConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
+      $('#countryRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
+      $('#countryDeaths').text(numberWithCommas(response.Countries[235].TotalDeaths));
+>>>>>>> fe51a003326ca3333fbcf43454568629e9efe5df
     }).catch(function(error){
       console.log(error)
     });
@@ -137,7 +144,7 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     if (data.email){      
       $('.buttons').css("display", "none");
-      $(".member-name").text('Welcome Back '+data.email);
+      $(".member-name").text('Welcome '+data.email);
       $(".member-name").append(' | <a href="./logout">Logout</a>')
       //console.log(data.subscription)
       if (data.subscription){
@@ -186,6 +193,16 @@ $(document).ready(function() {
       $('.buttons').css("display", "block");
     }
   });
+  setTimeout(function(){
+    // Regenerate the map (hotfix)
+    // Add heatmap data
+    addressPoints = addressPoints.map(function (p) {
+      return [p[0], p[1]];
+    });
+    //generateMap()
+    getMapData().then(generateMap);
+    L.heatLayer(addressPoints).addTo(map), draw = true;
+  }, 1500);
 });
 // User Login/Signup Modal
 $("#auth-signup").click(function() {
