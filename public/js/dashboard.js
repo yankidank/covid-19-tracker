@@ -28,7 +28,7 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response)
+      //console.log(response)
       $('#countryTitle').text('United States Statistics');
       $('#countryConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
       $('#countryRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
@@ -89,11 +89,11 @@ $(document).ready(function() {
       if (response.country === "United States"){   
         // Special Case for US to fix stats table results     
         $("#country_input").val("US")
-        console.log("IP performSearch US")
+        //console.log("IP performSearch US")
         performSearch("US")
       } else {
         $("#country_input").val(response.country)
-        console.log("IP performSearch "+response.country)
+        //console.log("IP performSearch "+response.country)
         performSearch(response.country)
       }
       generateMap(response.lat, response.lon)
@@ -104,7 +104,7 @@ $(document).ready(function() {
 
   // Request User's Location via the browser
   navigator.geolocation.getCurrentPosition(function(position) {
-    console.log('Location from Browser')
+    //console.log('Location from Browser')
     navigator.geolocation.getCurrentPosition(showPosition);
     ipSearch()
   },

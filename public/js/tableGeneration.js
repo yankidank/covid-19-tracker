@@ -167,6 +167,14 @@ function displayResponse(CovidData) {
         //capitalize the first letter of the country name
         country_input = country_input[0].toUpperCase() + country_input.slice(1);
       }
+      
+      // Reposition map after determining the input country lat+lon
+      /* var filteredWorldGPS = worldGPS
+          .filter(worldGPS => worldGPS.country === "Canada")
+      var worldGPSLat = filteredWorldGPS[0].latitude
+      var worldGPSLon = filteredWorldGPS[0].longitude
+      console.log('Country Lat: '+worldGPSLat+' & Lon: '+worldGPSLon)
+      map = L.map("map").setView([worldGPSLat, worldGPSLon], 6); */
 
       // Data sort and filter
       var dataFiltered = CovidData.data.covid19Stats
