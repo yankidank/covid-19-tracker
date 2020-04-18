@@ -96,25 +96,21 @@ $(document).ready(function() {
     });
   }
 
-  // Request User's Location
-/*   
-  async function getLocation() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log('Location from Browser')
-      navigator.geolocation.getCurrentPosition(showPosition);
-      ipSearch().then()
-    },
-    function(error) {
-      if (error.code == error.PERMISSION_DENIED){
-        // IP to Country API query
-        ipSearch().then()
-      }
-    });
-  }
+  // Request User's Location via the browser
+  navigator.geolocation.getCurrentPosition(function(position) {
+    console.log('Location from Browser')
+    navigator.geolocation.getCurrentPosition(showPosition);
+    ipSearch()
+  },
+  function(error) {
+    if (error.code == error.PERMISSION_DENIED){
+      // IP to Country API query
+      ipSearch()
+    }
+  });
   function showPosition(position) { 
     generateMap(position.coords.latitude, position.coords.longitude)
   }
-*/
 
   // Add heatmap data
   addressPoints = addressPoints.map(function (p) {
