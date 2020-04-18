@@ -29,10 +29,10 @@ $(document).ready(function() {
       method: "GET"
     }).then(function(response) {
       console.log(response)
-      $('#countryTitle').text('United States Statistic');
-      $('#countryConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
-      $('#countryRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
-      $('#countryDeaths').text(numberWithCommas(response.Countries[235].TotalDeaths));
+      // $('#countryTitle').text('United States Statistic');
+      $('#countConfirmed').text(numberWithCommas(response.Countries[235].TotalConfirmed));
+      $('#countRecovered').text(numberWithCommas(response.Countries[235].TotalRecovered));
+      $('#countDeaths').text(numberWithCommas(response.Countries[235].TotalDeaths));
     }).catch(function(error){
       console.log(error)
     });
