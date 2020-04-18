@@ -1,6 +1,8 @@
 # Covid-19 Tracker
 Visualize the spread and impact of Covid-19, subscribe for daily updates, and view stats.
 
+Demo: http://plague.site/
+
 ## Installation
 Begin by running ```npm install```
 
