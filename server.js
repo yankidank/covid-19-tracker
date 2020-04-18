@@ -122,7 +122,6 @@ function sendNewsletter(){
         }, 1800);
         setTimeout(function(){ 
           mailContent = mailContent9;
-          console.log(mailContent)
         }, 2000);
         setTimeout(function(){
           // Send email using nodemailer + sparkpost transport
