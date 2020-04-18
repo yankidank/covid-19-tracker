@@ -86,35 +86,37 @@ $(document).ready(function() {
       jsonp: 'callback'
     }).then(function(response) {
       //console.log(response)
-      $("#country_input").val(response.country)
-      console.log("performSearch "+response.country)
-      performSearch(response.country);
+      if (response.country === "United States"){   
+        // Special Case for US to fix stats table results     
+        $("#country_input").val("US")
+        console.log("IP performSearch US")
+        performSearch("US")
+      } else {
+        $("#country_input").val(response.country)
+        console.log("IP performSearch "+response.country)
+        performSearch(response.country)
+      }
       generateMap(response.lat, response.lon)
-      console.log("Location from IP API");
     }).catch(function(error){
       console.log(error)
     });
   }
 
-  // Request User's Location
-/*   
-  async function getLocation() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log('Location from Browser')
-      navigator.geolocation.getCurrentPosition(showPosition);
-      ipSearch().then()
-    },
-    function(error) {
-      if (error.code == error.PERMISSION_DENIED){
-        // IP to Country API query
-        ipSearch().then()
-      }
-    });
-  }
+  // Request User's Location via the browser
+  navigator.geolocation.getCurrentPosition(function(position) {
+    console.log('Location from Browser')
+    navigator.geolocation.getCurrentPosition(showPosition);
+    ipSearch()
+  },
+  function(error) {
+    if (error.code == error.PERMISSION_DENIED){
+      // IP to Country API query
+      ipSearch()
+    }
+  });
   function showPosition(position) { 
     generateMap(position.coords.latitude, position.coords.longitude)
   }
-*/
 
   // Add heatmap data
   addressPoints = addressPoints.map(function (p) {
@@ -194,8 +196,10 @@ $(document).ready(function() {
     });
     //generateMap()
     getMapData().then(generateMap);
-    L.heatLayer(addressPoints).addTo(map), draw = true;
-  }, 1500);
+    setTimeout(function(){
+      L.heatLayer(addressPoints).addTo(map), draw = true;
+    }, 250)
+  }, 1750);
 });
 // User Login/Signup Modal
 $("#auth-signup").click(function() {
