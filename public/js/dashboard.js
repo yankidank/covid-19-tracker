@@ -86,11 +86,17 @@ $(document).ready(function() {
       jsonp: 'callback'
     }).then(function(response) {
       //console.log(response)
-      $("#country_input").val(response.country)
-      console.log("performSearch "+response.country)
-      performSearch(response.country);
+      if (response.country === "United States"){   
+        // Special Case for US to fix stats table results     
+        $("#country_input").val("US")
+        console.log("IP performSearch US")
+        performSearch("US")
+      } else {
+        $("#country_input").val(response.country)
+        console.log("IP performSearch "+response.country)
+        performSearch(response.country)
+      }
       generateMap(response.lat, response.lon)
-      console.log("Location from IP API");
     }).catch(function(error){
       console.log(error)
     });
