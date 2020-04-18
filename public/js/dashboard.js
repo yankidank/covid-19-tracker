@@ -194,8 +194,10 @@ $(document).ready(function() {
     });
     //generateMap()
     getMapData().then(generateMap);
-    L.heatLayer(addressPoints).addTo(map), draw = true;
-  }, 1500);
+    setTimeout(function(){
+      L.heatLayer(addressPoints).addTo(map), draw = true;
+    }, 250)
+  }, 1750);
 });
 // User Login/Signup Modal
 $("#auth-signup").click(function() {
