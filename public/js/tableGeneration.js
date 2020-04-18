@@ -176,6 +176,7 @@ function displayResponse(CovidData) {
       console.log('Country Lat: '+worldGPSLat+' & Lon: '+worldGPSLon)
       map = L.map("map").setView([worldGPSLat, worldGPSLon], 6); */
 
+
       // Data sort and filter
       var dataFiltered = CovidData.data.covid19Stats
       // .filter(city => city.deaths > 0) // Filter out 0 Deaths

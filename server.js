@@ -142,8 +142,8 @@ function sendNewsletter(){
       }
   });
 }
-/* 
-sendNewsletter();
+
+/* sendNewsletter();
 setInterval(function(){ 
   sendNewsletter();
 }, 86400000); // Run once a day
