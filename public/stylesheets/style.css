@@ -95,3 +95,6 @@ form.login {
 .fa {
   font-family: "Font Awesome 5 Free", "FontAwesome";
 }
+.is-one-quarter.stats {
+  padding-top:0;
+}
