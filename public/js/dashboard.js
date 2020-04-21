@@ -4,10 +4,10 @@ function numberWithCommas(x) {
 
 $(document).ready(function() {
 
-  //global stats
-  function getGlobalStats(){
+  // Global Stats
+  async function getGlobalStats(){
     var queryURL = "https://api.covid19api.com/summary";
-    $.ajax({
+    await $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
@@ -22,9 +22,9 @@ $(document).ready(function() {
   getGlobalStats()
 
   // US Stats
-  function getUSAStats(){
+  async function getUSAStats(){
     var queryURL = "https://api.covid19api.com/summary";
-    $.ajax({
+    await $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
@@ -42,7 +42,7 @@ $(document).ready(function() {
   // Heatmap Data 
   var addressPoints = []
   async function getMapData(){
-    $.ajax({
+    await $.ajax({
       url: '/api/covid_data/deaths',
       method: "GET"
     }).then(function(response) {
@@ -61,7 +61,7 @@ $(document).ready(function() {
 
   // Prepare the map
   var map
-  function generateMap(lat,lon){
+  async function generateMap(lat,lon){
     if (map){
       map.remove();
     }
@@ -73,66 +73,67 @@ $(document).ready(function() {
       map = L.map("map").setView([lat, lon], 6);
     }
       // Set theme, try 'DarkGray'
-    L.esri.basemapLayer("Gray").addTo(map);
-    L.heatLayer(addressPoints).addTo(map), draw = true;
+    await L.esri.basemapLayer("Gray").addTo(map);
+    await L.heatLayer(addressPoints).addTo(map), draw = true;
   }
 
   // IP to location API
   async function ipSearch(){
-    $.ajax({
+    await $.ajax({
       url: 'http://ip-api.com/json?callback=?',
       method: "GET",
       dataType: 'json',       
       jsonp: 'callback'
-    }).then(function(response) {
+    }).then(async function(response) {
       //console.log(response)
       if (response.country === "United States"){   
         // Special Case for US to fix stats table results     
         $("#country_input").val("US")
         //console.log("IP performSearch US")
-        performSearch("US")
+        await performSearch("US")
       } else {
         $("#country_input").val(response.country)
         //console.log("IP performSearch "+response.country)
-        performSearch(response.country)
+        await performSearch(response.country)
       }
-      generateMap(response.lat, response.lon)
+      await generateMap(response.lat, response.lon)
     }).catch(function(error){
       console.log(error)
     });
   }
 
-  // Request User's Location via the browser
-  navigator.geolocation.getCurrentPosition(function(position) {
-    //console.log('Location from Browser')
-    navigator.geolocation.getCurrentPosition(showPosition);
-    ipSearch()
-  },
-  function(error) {
-    if (error.code == error.PERMISSION_DENIED){
-      // IP to Country API query
-      ipSearch()
-    }
-  });
-  function showPosition(position) { 
-    generateMap(position.coords.latitude, position.coords.longitude)
-  }
-
-  // Add heatmap data
-  addressPoints = addressPoints.map(function (p) {
-      return [p[0], p[1]];
-  });
-
-  //generateMap()
-  getMapData().then(generateMap);
-
-  $("#icon-geolocate").click(function(){
+  $("#icon-geolocate").click(async function(){
+    console.log("Geolocate")
     $("#icon-geolocate").toggleClass("fa-crosshairs")
     $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")
-    ipSearch();
+    
+    // Request User's Location via the browser
+    navigator.geolocation.getCurrentPosition(async function(position) {
+      //console.log('Location from Browser')
+      navigator.geolocation.getCurrentPosition(showPosition);
+      await ipSearch()
+    },
+    async function(error) {
+      if (error.code == error.PERMISSION_DENIED){
+        // IP to Country API query
+        await ipSearch()
+      }
+    });
+
+    async function showPosition(position) { 
+      await generateMap(position.coords.latitude, position.coords.longitude)
+    }
+
     $("#icon-geolocate").toggleClass("fa-crosshairs")
     $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")
   })
+
+  // Add heatmap data
+  // The last number represents intensity as a decimal, this needs work
+  addressPoints = addressPoints.map( p => [p[0], p[1], parseFloat('.'+p[2]) ] );
+
+  //generateMap()
+  getMapData().then(generateMap);
   
   // GET request to figure out which user is logged in
   // updates the HTML on the page
@@ -188,18 +189,17 @@ $(document).ready(function() {
       $('.buttons').css("display", "block");
     }
   });
-  setTimeout(function(){
-    // Regenerate the map (hotfix)
-    // Add heatmap data
-    addressPoints = addressPoints.map(function (p) {
-      return [p[0], p[1]];
-    });
+
+  // Regenerate the map
+  // Add heatmap data
+  async function regenMap(){
+    addressPoints = addressPoints.map( p => [p[0], p[1], parseFloat('.'+p[2]) ] );
     //generateMap()
     getMapData().then(generateMap);
-    setTimeout(function(){
-      L.heatLayer(addressPoints).addTo(map), draw = true;
-    }, 250)
-  }, 1750);
+    //L.heatLayer(addressPoints).addTo(map), draw = true;
+  }
+  regenMap();
+  
 });
 // User Login/Signup Modal
 $("#auth-signup").click(function() {
