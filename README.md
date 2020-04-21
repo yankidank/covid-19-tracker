@@ -6,9 +6,13 @@ Demo: http://plague.site/
 ## Installation
 Begin by running ```npm install```
 
-Import MySQL data with ```node csv_to_json_test/read-file-4.js```
+Create a MySQL database and import schema.sql file to create a 'stats' table.
 
-Create a file named ```.env``` in the root directory, add and edit the following lines to configure your server.
+Configure your MySQL connection by editing both the config.json and /csv_to_mysql/run-file-4.js files.
+
+Import MySQL data by running ```node csv_to_mysql/read-file-4.js```
+
+Create a file named ```.env``` in the root directory, insert the lines below and edit their values to configure the API and login password phrase.
 ```
 SPARKPOST_API_KEY=SAMPLEAPIKEYGOESHERE
 LOGIN_SECRET=insert your phrase
@@ -29,12 +33,12 @@ The following URLs interact with the API
 
 - bulma
 - csvjson
-- fast-csv
 - dotenv
 - bcryptjs
 - express
 - express-handlebars
 - express-session
+- fast-csv
 - moment
 - mysql
 - mysql2
@@ -52,14 +56,10 @@ Data provided by:
 - https://github.com/CSSEGISandData/COVID-19
 
 ## Source
-Find the source code for this project at the GitHub page: https://github.com/yankidank/group-project-2
+Find the source code for this project at the GitHub page: https://github.com/yankidank/group-project-2 or visit the [Plague.site's About Page](http://plague.site/about/).
 
-GitHub contributors: 
-[yankidank](https://github.com/yankidank), 
+GitHub Project Contributors: 
 [abautista3712](https://github.com/abautista3712), 
 [rfilkin](https://github.com/rfilkin), 
+[Yankidank](https://github.com/yankidank), 
 [AshelyNicole](https://github.com/AshelyNicole), 
-[skateshindler](https://github.com/skateshindler) 
-
-
-
