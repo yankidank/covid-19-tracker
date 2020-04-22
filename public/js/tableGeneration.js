@@ -294,12 +294,12 @@ $("#country_filter").submit(function (event) {
   performSearch();
 });
 
-function performSearch(countryQuery) {
+async function performSearch(countryQuery) {
   // Begin icon animation
   $("#icon-search").toggleClass("fa-search");
   $("#icon-search").toggleClass("fa-spinner fa-pulse");
   var queryURL = buildQueryURL(countryQuery);
-  $.ajax({
+  await $.ajax({
     async: true,
     crossDomain: true,
     url: queryURL,
