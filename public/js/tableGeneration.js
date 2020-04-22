@@ -45,9 +45,11 @@ function buildQueryURL(country) {
   function getCountryStats(country_input) {
     // Correct common country names to match API
     if (
+      country_input === "Us" ||
       country_input === "us" ||
-      country_input === "US" ||
+      country_input === "usa" ||
       country_input === "USA" ||
+      country_input === "Usa" ||
       country_input === "United States" ||
       country_input === "America" ||
       country_input === "U.S." ||
@@ -114,7 +116,11 @@ function buildQueryURL(country) {
           resArr[0].TotalRecovered &&
           resArr[0].TotalDeaths
         ) {
-          $("#countryTitle").text(country_input + " Statistics");
+          if (country_input === "United States of America") {
+            $("#countryTitle").text("United States Statistics");
+          } else {
+            $("#countryTitle").text(country_input + " Statistics");
+          }
           $("#countryConfirmed").text(numberWithCommas(resArr[0].TotalConfirmed));
           $("#countryRecovered").text(numberWithCommas(resArr[0].TotalRecovered));
           $("#countryDeaths").text(numberWithCommas(resArr[0].TotalDeaths));
