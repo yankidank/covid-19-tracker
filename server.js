@@ -65,7 +65,6 @@ db.User.findAll({
     return item['email'];
   });
   subscriberEmails = subscriberArray.toString()
-  console.log(subscriberEmails)
 })
 
 function sendNewsletter(){

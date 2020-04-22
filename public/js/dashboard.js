@@ -78,51 +78,48 @@ $(document).ready(function() {
   }
 
   // IP to location API
-  async function ipSearch(){
-    await $.ajax({
+  function ipSearch(){
+    $.ajax({
       url: 'http://ip-api.com/json?callback=?',
       method: "GET",
       dataType: 'json',       
       jsonp: 'callback'
-    }).then(async function(response) {
+    }).then(function(response) {
       //console.log(response)
       if (response.country === "United States"){   
         // Special Case for US to fix stats table results     
         $("#country_input").val("US")
         //console.log("IP performSearch US")
-        await performSearch("US")
+        performSearch("US")
       } else {
         $("#country_input").val(response.country)
         //console.log("IP performSearch "+response.country)
-        await performSearch(response.country)
+        performSearch(response.country)
       }
-      await generateMap(response.lat, response.lon)
+      generateMap(response.lat, response.lon)
     }).catch(function(error){
       console.log(error)
     });
   }
 
   $("#icon-geolocate").click(async function(){
-    console.log("Geolocate")
+    console.log("Geolocate User...")
     $("#icon-geolocate").toggleClass("fa-crosshairs")
     $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")
     
     // Request User's Location via the browser
     navigator.geolocation.getCurrentPosition(async function(position) {
-      //console.log('Location from Browser')
-      navigator.geolocation.getCurrentPosition(showPosition);
-      await ipSearch()
+      console.log('Location from Browser')
+      navigator.geolocation.getCurrentPosition(generateMap(position.coords.latitude, position.coords.longitude));
+      //await ipSearch()
     },
-    async function(error) {
+    function(error) {
       if (error.code == error.PERMISSION_DENIED){
         // IP to Country API query
-        await ipSearch()
+        console.log('Browser Location Denied, Trying by IP')
+        ipSearch()
       }
     });
-
-    async function showPosition(position) { 
-      await generateMap(position.coords.latitude, position.coords.longitude)
-    }
 
     $("#icon-geolocate").toggleClass("fa-crosshairs")
     $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")
@@ -130,10 +127,10 @@ $(document).ready(function() {
 
   // Add heatmap data
   // The last number represents intensity as a decimal, this needs work
-  addressPoints = addressPoints.map( p => [p[0], p[1], parseFloat('.'+p[2]) ] );
+  //addressPoints = addressPoints.map( p => [p[0], p[1], parseFloat('.'+p[2]) ] );
 
   //generateMap()
-  getMapData().then(generateMap);
+  //getMapData().then(generateMap);
   
   // GET request to figure out which user is logged in
   // updates the HTML on the page
@@ -193,12 +190,13 @@ $(document).ready(function() {
   // Regenerate the map
   // Add heatmap data
   async function regenMap(){
-    addressPoints = addressPoints.map( p => [p[0], p[1], parseFloat('.'+p[2]) ] );
+    //addressPoints = addressPoints.map( p => [p[0], p[1], parseFloat('.'+p[2]) ] );
     //generateMap()
     getMapData().then(generateMap);
     //L.heatLayer(addressPoints).addTo(map), draw = true;
   }
   regenMap();
+  
   
 });
 // User Login/Signup Modal
