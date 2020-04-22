@@ -78,8 +78,8 @@ $(document).ready(function() {
   }
 
   // IP to location API
-  function ipSearch(){
-    $.ajax({
+  async function ipSearch(){
+    await $.ajax({
       url: 'http://ip-api.com/json?callback=?',
       method: "GET",
       dataType: 'json',       
@@ -108,10 +108,11 @@ $(document).ready(function() {
     $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")
     
     // Request User's Location via the browser
-    navigator.geolocation.getCurrentPosition(async function(position) {
+    navigator.geolocation.getCurrentPosition(function(position) {
       console.log('Location from Browser')
-      navigator.geolocation.getCurrentPosition(generateMap(position.coords.latitude, position.coords.longitude));
-      //await ipSearch()
+      navigator.geolocation.getCurrentPosition(showPosition);
+      // Should find a better way to table search based on lat+lon, but for now using IP API
+      ipSearch()
     },
     function(error) {
       if (error.code == error.PERMISSION_DENIED){
@@ -120,6 +121,9 @@ $(document).ready(function() {
         ipSearch()
       }
     });
+    function showPosition(position) { 
+      generateMap(position.coords.latitude, position.coords.longitude)
+    }
 
     $("#icon-geolocate").toggleClass("fa-crosshairs")
     $("#icon-geolocate").toggleClass("fa-spinner fa-pulse")

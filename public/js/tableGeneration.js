@@ -108,8 +108,7 @@ function buildQueryURL(country) {
         }
         var countryResponse = response.Countries;
         var resArr = countryResponse.filter(countryFilter);
-        console.log(resArr[0]);
-        console.log("Update HTML");
+        //console.log(resArr[0]);
         if (
           resArr[0].TotalConfirmed &&
           resArr[0].TotalRecovered &&
