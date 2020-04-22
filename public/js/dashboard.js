@@ -6,6 +6,7 @@ $(document).ready(function() {
 
   // Global Stats
   async function getGlobalStats(){
+    performSearch("US")
     var queryURL = "https://api.covid19api.com/summary";
     await $.ajax({
       url: queryURL,
