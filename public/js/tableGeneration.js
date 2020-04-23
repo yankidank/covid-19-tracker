@@ -21,7 +21,6 @@ function buildQueryURL(country) {
   } else {
     country_input = String($("#country_input").val().trim());
   }
-  console.log(country_input);
 
   // If country is passed as a parameter, override the input field
   if (country) {
@@ -294,12 +293,12 @@ $("#country_filter").submit(function (event) {
   performSearch();
 });
 
-async function performSearch(countryQuery) {
+function performSearch(countryQuery) {
   // Begin icon animation
   $("#icon-search").toggleClass("fa-search");
   $("#icon-search").toggleClass("fa-spinner fa-pulse");
   var queryURL = buildQueryURL(countryQuery);
-  await $.ajax({
+  $.ajax({
     async: true,
     crossDomain: true,
     url: queryURL,
