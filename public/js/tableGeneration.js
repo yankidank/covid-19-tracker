@@ -109,7 +109,7 @@ function buildQueryURL(country) {
         }
         var countryResponse = response.Countries;
         var resArr = countryResponse.filter(countryFilter);
-        console.log(resArr[0]);
+        //console.log(resArr[0]);
         if (
           resArr[0].TotalConfirmed &&
           resArr[0].TotalRecovered &&
@@ -305,7 +305,7 @@ function performSearch(countryQuery) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
-      "X-RapidAPI-Key": "3d13e2aaf8msh7db1bf65422b6e8p10a051jsne505d94c1a6a",
+      "X-RapidAPI-Key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
     },
   }).then(displayResponse);
 }
@@ -320,7 +320,7 @@ function displayAllOnLanding() {
     method: "GET",
     headers: {
       "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
-      "x-rapidapi-key": "3d13e2aaf8msh7db1bf65422b6e8p10a051jsne505d94c1a6a",
+      "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
     },
   }).then(function (response) {
     // displayResponse(response);
@@ -340,7 +340,7 @@ displayAllOnLanding();
 //     method: "GET",
 //     headers: {
 //       "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
-//       "x-rapidapi-key": "3d13e2aaf8msh7db1bf65422b6e8p10a051jsne505d94c1a6a",
+//       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
 //     },
 //   }).then(function (response) {
 //     displayResponse(response);
