@@ -21,7 +21,6 @@ function buildQueryURL(country) {
   } else {
     country_input = String($("#country_input").val().trim());
   }
-  console.log(country_input);
 
   // If country is passed as a parameter, override the input field
   if (country) {
@@ -110,7 +109,7 @@ function buildQueryURL(country) {
         }
         var countryResponse = response.Countries;
         var resArr = countryResponse.filter(countryFilter);
-        //console.log(resArr[0]);
+        console.log(resArr[0]);
         if (
           resArr[0].TotalConfirmed &&
           resArr[0].TotalRecovered &&
@@ -294,19 +293,19 @@ $("#country_filter").submit(function (event) {
   performSearch();
 });
 
-async function performSearch(countryQuery) {
+function performSearch(countryQuery) {
   // Begin icon animation
   $("#icon-search").toggleClass("fa-search");
   $("#icon-search").toggleClass("fa-spinner fa-pulse");
   var queryURL = buildQueryURL(countryQuery);
-  await $.ajax({
+  $.ajax({
     async: true,
     crossDomain: true,
     url: queryURL,
     method: "GET",
     headers: {
       "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
-      "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
+      "X-RapidAPI-Key": "3d13e2aaf8msh7db1bf65422b6e8p10a051jsne505d94c1a6a",
     },
   }).then(displayResponse);
 }
@@ -321,7 +320,7 @@ function displayAllOnLanding() {
     method: "GET",
     headers: {
       "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
-      "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
+      "x-rapidapi-key": "3d13e2aaf8msh7db1bf65422b6e8p10a051jsne505d94c1a6a",
     },
   }).then(function (response) {
     // displayResponse(response);
@@ -341,7 +340,7 @@ displayAllOnLanding();
 //     method: "GET",
 //     headers: {
 //       "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
-//       "x-rapidapi-key": "fa69145befmshc39d266ba3896ddp1a470ejsndddb85d59df4",
+//       "x-rapidapi-key": "3d13e2aaf8msh7db1bf65422b6e8p10a051jsne505d94c1a6a",
 //     },
 //   }).then(function (response) {
 //     displayResponse(response);
