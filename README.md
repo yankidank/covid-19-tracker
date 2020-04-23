@@ -62,4 +62,10 @@ GitHub Project Contributors:
 [abautista3712](https://github.com/abautista3712), 
 [rfilkin](https://github.com/rfilkin), 
 [Yankidank](https://github.com/yankidank), 
-[AshelyNicole](https://github.com/AshelyNicole), 
+[AshelyNicole](https://github.com/AshelyNicole)
+
+## Newsletter
+An example of the Newsletter email. 
+
+![image](https://user-images.githubusercontent.com/18619/80010635-90023c00-847f-11ea-85d6-5192bc200ff7.png)
+

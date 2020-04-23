@@ -102,7 +102,7 @@ $(document).ready(function() {
       console.log(error)
     });
   }
-
+  
   $("#icon-geolocate").click(async function(){
     console.log("Geolocate User...")
     $("#icon-geolocate").toggleClass("fa-crosshairs")
