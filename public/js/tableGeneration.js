@@ -98,7 +98,7 @@ function buildQueryURL(country) {
     } else if (country_input === "Vietnam") {
       country_input = "Viet Nam";
     }
-    
+
     var queryURL = "https://api.covid19api.com/summary";
     $.ajax({
       url: queryURL,
@@ -110,7 +110,7 @@ function buildQueryURL(country) {
         }
         var countryResponse = response.Countries;
         var resArr = countryResponse.filter(countryFilter);
-        console.log(resArr[0]);
+        //console.log(resArr[0]);
         if (
           resArr[0].TotalConfirmed &&
           resArr[0].TotalRecovered &&
