@@ -29,7 +29,6 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response.Countries[177])
       $('#countryTitle').text('United States Statistics');
       $('#countryConfirmed').text(numberWithCommas(response.Countries[177].TotalConfirmed));
       $('#countryRecovered').text(numberWithCommas(response.Countries[177].TotalRecovered));
